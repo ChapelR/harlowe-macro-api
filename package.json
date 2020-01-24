@@ -1,0 +1,26 @@
+{
+  "name": "harlowe-macro-api",
+  "version": "0.1.0",
+  "description": "Unofficial Macro API for Twine 2/Harlowe.",
+  "main": "build.js",
+  "dependencies": {},
+  "devDependencies": {
+    "fs-jetpack": "^2.2.3",
+    "node-zip": "^1.1.1",
+    "uglify-js": "^3.7.6"
+  },
+  "scripts": {
+    "build": "node build.js"
+  },
+  "keywords": [
+    "harlowe",
+    "twine"
+  ],
+  "author": "Chapel",
+  "license": "Unlicense",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChapelR/harlowe-macro-api.git"
+  },
+  "private": true
+}
