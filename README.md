@@ -66,13 +66,94 @@ You can use the JavaScript `this` keyword to access the *macro context* from wit
 
 ### Creating Command Macros
 
-Creating command macros is fairly straight-forward. 
+Creating command macros is fairly straight forward. 
 
-TODO
+Command macros need a name and a handler function and can return values to be used as arguments to other macros or to be displayed to users. For example:
+
+```javascript
+Harlowe.macro('mymacro', function () {
+    return 'Hey there!';
+});
+```
+
+In a passage:
+
+```
+(set: $var to (mymacro:))
+$var <!-- 'Hey there!' -->
+```
+
+You can read the arguments passed to a macro as well:
+
+```javascript
+Harlowe.macro('greet', function (name) {
+    return 'Hey, ' + name + '!';
+});
+```
+
+In passage:
+
+```
+(set: $var to (greet: 'Bob'))
+$var <!-- 'Hey, Bob!' -->
+(greet: 'Jane') <!-- 'Hey, Jane!' -->
+```
+
+Of course, checking to make sure you get the arguments you expect, or setting up sane defaults is always wise:
+
+```javascript
+Harlowe.macro('greet', function (name) {
+    if (!name || typeof name !== 'string' || !name.trim()) {
+        name = 'Player';
+    }
+    return 'Hey, ' + name + '!';
+});
+```
+
+You may opt instead to throw errors:
+
+```javascript
+Harlowe.macro('greet', function (name) {
+    if (typeof name !== 'string' || !name.trim()) {
+        throw new TypeError('The "name" parameter of the (' + this.name + ':) macro should be a non-empty string!');
+    }
+    return 'Hey, ' + name + '!';
+});
+```
+
+Macros do not need to return anything in specific and can also be used to simply run any arbitrary JavaScript code.
+
+```javascript
+Harlowe.macro('log', function (content) {
+    if (content !== undefined) {
+        console.log(content);
+    }
+});
+```
+
+You can access arguments via the macro context (via `this`) instead of the function's parameters:
+
+```javascript
+Harlowe.macro('log', function () {
+    if (this.content !== undefined) {
+        console.log(this.content);
+    }
+});
+```
+
+You can also access the macro's name through the macro context:
+
+```javascript
+Harlowe.macro('log', function () {
+    if (this.content !== undefined) {
+        console.log('The macro (' + this.name + ':) says:', this.content);
+    }
+});
+```
 
 ### Creating Changer Macros 
 
-Changer macros are significantly more complex than command macros.
+Changer macros are significantly more complex than command macros. Fortunately, most of what applies to command macros also applies to these macros. The biggest difference is that you can't return anything from the handlers of changer macros, and that changer macros have an additional changer function argument that handles most of the actual logic.
 
 TODO
 
