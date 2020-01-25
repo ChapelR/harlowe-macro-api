@@ -23,17 +23,29 @@ Including the `changer` argument causes a changer macro to be created. Omitting 
 #### Arguments
 
 - `name` ( *`string`* ) The name to give the macro. For example, the name `"blue"` would create a macro called like this: `(blue:)`. Valid macro names should generally consist of only lowercase Latin letters.
-- `handler` ( *`function`* )  The handler function. For changer macros it is run when the macro is executed, before rendering, and can be used for tasks that need to happen immediately. Not every changer macro will require a handler, pass an empty function `funciton () {}` is you don't need it. The arguments passed to the macro are passed to the function as arguments. There is also a *macro content* similar (superficially) to SugarCube's macro API that you may access (see below).
+- `handler` ( *`function`* )  The handler function. For changer macros it is run when the macro is executed, before rendering, and can be used for tasks that need to happen immediately. Not every changer macro will require a handler, pass an empty function `funciton () {}` if you don't need it. The arguments passed to the macro are passed to the function as arguments. There is also a *macro content* similar (superficially) to SugarCube's macro API that you may access (see below).
 - `changer` ( *`function`* ) ( optional ) The changer function, which is run during the rendering process. Including this argument creates a changer macro, while omitting it creates a command macro. You can access the hook content (called a *descriptor*) from the macro context. Like handlers, macro arguments are passed through.
 
-#### Context
+#### Context Properties
 
-You can use the JavaScript `this` keyword to access the *macro context* from within handler and changer functions. The following properties are available in the macro context:
+You can use the JavaScript `this` keyword to access the *`MacroContext`* instance from within handler and changer functions. The following properties are available in the macro context:
 
 -  `this.name` ( *`string`* ) The name of the macro.
 - `this.args` ( *`array`* )  An array of arguments passed to the macro invocation--an empty array if no arguments are provided.
 - `this.instance` ( *`a ChangerCommand instance`* ) This is the instance of the changer command created by a changer macro. This property is only available to the handler (not the changer function) of a changer macro.
 - `this.descriptor` ( *`a ChangerDescriptor instance`* ) This is the descriptor (which represents the attached hook) of a changer macro. This property is only available to the changer function of changer macros.
+
+#### Context Methods
+
+In addition to the above properties, the macro context also has the following methods.
+
+- `this.error(message [, alert])` This method can be used to generate an error. The error object will be returned so that you can catch or throw it. The error message will be logged to the console, and optionally can generate an alert. Do not generate an alert if you intend to throw the error.
+  - `message` ( *`string`* ) The message to pair with the error.
+  - `alert` ( *`boolean`* ) If truthy, creates an alert with the error message.
+  - **Returns**: An `Error` instance.
+- `this.typeCheck(typeList)` This method allows you to quickly check arguments against a list of types. If there is a mismatch, an `Error` instance is returned, prefilled with all the issues as a message.
+  - `typeList` ( *`string array`* ) An array of string types, like `"string"` or `"number"`. You can use the special keyword `"any"` to accept any type, and check for one of a list of types using the pipe to separate them, e.g. `"number|boolean"` would check for a number or boolean. The array of types should be provided in the same order as the arguments are expected.
+  - **Returns**: An `Error` instance if any errors are found or `undefined` if no errors are found.
 
 **Example contexts:**
 
@@ -121,6 +133,29 @@ Harlowe.macro('greet', function (name) {
 });
 ```
 
+You can use the context methods described above to generate errors:
+
+```javascript
+Harlowe.macro('greet', function (name) {
+    if (typeof name !== 'string' || !name.trim()) {
+        throw this.error('The "name" parameter should be a non-empty string!');
+    }
+    return 'Hey, ' + name + '!';
+});
+```
+
+You can use the `context#typeCheck()` method to simplify type checking arguments to be even simpler, though you can only check for types, not for non-empty strings. You also cannot check *instances* like arrays.
+
+```javascript
+Harlowe.macro('greet', function (name) {
+    var err = this.typeCheck(['string']); 
+    if (err) { // if no errors are found, nothing (e.g., undefined) is returned
+        throw err;
+    }
+    return 'Hey, ' + name + '!';
+});
+```
+
 Macros do not need to return anything in specific and can also be used to simply run any arbitrary JavaScript code.
 
 ```javascript
@@ -135,8 +170,8 @@ You can access arguments via the macro context (via `this`) instead of the funct
 
 ```javascript
 Harlowe.macro('log', function () {
-    if (this.content !== undefined) {
-        console.log(this.content);
+    if (this.args[0] !== undefined) { // this.args[0] is the first argument
+        console.log(this.args[0]);
     }
 });
 ```
@@ -145,8 +180,8 @@ You can also access the macro's name through the macro context:
 
 ```javascript
 Harlowe.macro('log', function () {
-    if (this.content !== undefined) {
-        console.log('The macro (' + this.name + ':) says:', this.content);
+    if (this.args[0] !== undefined) {
+        console.log('The macro (' + this.name + ':) says:', this.args[0]);
     }
 });
 ```
@@ -155,13 +190,73 @@ Harlowe.macro('log', function () {
 
 Changer macros are significantly more complex than command macros. Fortunately, most of what applies to command macros also applies to these macros. The biggest difference is that you can't return anything from the handlers of changer macros, and that changer macros have an additional changer function argument that handles most of the actual logic.
 
-TODO
+Let's look at an incredibly basic changer macro, a macro that simply suppresses content.
 
-#### Descriptors
+```javascript
+Harlowe.macro('silently', function () {}, function () {
+    this.descriptor.enabled = false;
+});
+```
 
-When you act on descriptors in your changer macros, you'll need to know what it's parameters do, and what particular options you have built-in at your finger tips. This section will go over some basic and common use-cases for descriptors.
+The above code suppressed output *and execution*:
 
-TODO
+```
+This content is visible. (set: $num to 1)
+
+$num <!-- 1 -->
+
+(silently:)[You won't see this disabled content! (set: $b to 3)]
+
+$num <!-- 1 -->
+```
+
+You have access to the descriptor source, which lets you alter it:
+
+```javascript
+Harlowe.macro('p', function () {}, function () {
+    this.descriptor.source = '<p class="p-macro">' + this.descriptor.source + '</p>';
+});
+```
+
+The `(p:)` macro above wraps it's source content in a `<p>` element with the class `.p-macro`. Easy!
+
+How about altering styles?
+
+```javascript
+Harlowe.macro('red', function () {}, function () {
+    this.descriptor.attr.push( { 
+        style : function () {
+            return 'color: red;';
+        }
+    });
+});
+```
+
+A more advanced color macro (Harlowe doesn't need one, but still):
+
+```javascript
+Harlowe.macro('magiccolor', function () {
+    var err = this.typeCheck(['string']);
+    if (err) throw err;
+}, function (color) {
+    this.descriptor.attr.push( { 
+        style : function () {
+            return 'color: ' + color + ';';
+        }
+    });
+});
+```
+
+You aren't limited to just doing things the Harlowe way, though. The descriptor also has a `target` property that contains a jQuery instance of the `<tw-hook>` element your changer macro is working on.
+
+```javascript
+Harlowe.macro('classy', function () {
+    var err = this.typeCheck(['string']);
+    if (err) throw err;
+}, function (cls) {
+    this.descriptor.target.addClass(cls);
+});
+```
 
 ## Other APIs
 

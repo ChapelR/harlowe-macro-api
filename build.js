@@ -1,9 +1,10 @@
-// jshint esversion: 9
+// jshint environment: node, esversion: 9
 
 const jetpack = require('fs-jetpack'),
     uglify = require('uglify-js'),
     zip = require('node-zip')(),
     fs = require('fs'),
+    version = require('./package.json').version,
     scriptName = 'Harlowe Macro API',
     file = 'macro.js',
     dist = 'dist/macro.min.js',
@@ -19,7 +20,7 @@ function build (path, output) {
     
     console.log(result.error);
     
-    ret = '// ' + scriptName + ', for Harlowe, by Chapel\n;' + result.code + '\n// end ' + scriptName; 
+    ret = '// ' + scriptName + ', by Chapel; version ' + version + '\n;' + result.code + '\n// end ' + scriptName; 
     
     jetpack.write(output, ret, {atomic : true});
 
