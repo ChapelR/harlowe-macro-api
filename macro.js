@@ -178,7 +178,7 @@
             throw new Error('cannot access variable "' + name + '"');
         }
         name = name.substr(1);
-        if (set) {
+        if (set !== undefined) {
             if (!isSerialisable(set)) {
                 throw new Error('The value passed to variable "' + name + '" cannot be serialized.');
             }

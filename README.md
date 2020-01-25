@@ -6,6 +6,48 @@ This is unofficial code, and relies on hacks. Future versions of Harlowe may bre
 
 This documentation is intended for people who *make* custom macros, so it may be a bit technical. If you were sent here by some script written by some author and can't figure out what to do, go [here](installation-guide.md). It is recommended that macro creators similarly point their end users to the installation guide linked above rather than to this README or the repo in general.
 
+See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). 
+
+Find releases on [the releases page](https://github.com/ChapelR/harlowe-macro-api/releases) and report issues on the [issues page](https://github.com/ChapelR/harlowe-macro-api/issues).
+
+## Contents
+
+- [Installation Guide](installation-guide.md)
+
+- Documentation
+
+  - [Macro API](#macro-api)
+
+    - [Function: `Harlowe.macro()`](#function-harlowe.macro)
+
+    - [Creating Command Macros](#creating-command-macros)
+
+    - [Creating Changer Macros](#creating-changer-macros)
+
+  - [Other APIs](#other-apis)
+
+    - [Function: `Harlowe.passage()`](#function-harlowe.passage)
+
+    - [Function: `Harlowe.goto()`](#function-harlowe.goto)
+
+    - [Function: `Harlowe.variable()`](#function-harlowe.variable)
+
+    - [Function: `Harlowe.visited()`](#function-harlowe.visited)
+
+    - [Function: `Harlowe.hasVisited()`](#function-harlowe.hasvisited)
+
+    - [Function: `Harlowe.turns()`](#function-harlowe.turns)
+
+  - [API_ACCESS](#api_access)
+
+  - [Unsolicited Advice for Macro Creators](#unsolicited-advice-for-macro-creators)
+
+- [Examples](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples)
+
+- [Releases and Downloads](https://github.com/ChapelR/harlowe-macro-api/releases)
+
+- [Issue Tracker](https://github.com/ChapelR/harlowe-macro-api/issues)
+
 ## Macro API
 
 ### Function: `Harlowe.macro()`
