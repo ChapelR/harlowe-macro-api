@@ -20,7 +20,7 @@ Find releases on [the releases page](https://github.com/ChapelR/harlowe-macro-ap
 
     - [Function: `Harlowe.macro()`](#function-harlowe.macro)
 
-    - [Creating Command Macros](#creating-command-macros)
+    - [Creating Basic Macros](#creating-basic-macros)
 
     - [Creating Changer Macros](#creating-changer-macros)
 
@@ -52,7 +52,7 @@ Find releases on [the releases page](https://github.com/ChapelR/harlowe-macro-ap
 
 ### Function: `Harlowe.macro()`
 
-This function can be used to create new macros. Two generic types of macros can be created; *command* macros (like `(prompt:)`, `(set:)`, `(num:)`, etc), and *changer* macros (like `(if:)`, `(font:)`, `(hidden:)`, etc). Generally speaking, command macros run a single function and then either return the result, or perform some other kind of action. Changer macros are attached to hooks and perform some action on said hooks (called **descriptors** internally).
+This function can be used to create new macros. Two generic types of macros can be created; *basic* macros (like `(prompt:)`, `(set:)`, `(num:)`, etc), and *changer* macros (like `(if:)`, `(font:)`, `(hidden:)`, etc). Generally speaking, basic macros run a single function and then either return the result, or perform some other kind of action. Changer macros are attached to hooks and perform some action on said hooks (called **descriptors** internally).
 
 #### Syntax
 
@@ -60,13 +60,13 @@ This function can be used to create new macros. Two generic types of macros can 
 Harlowe.macro(name, handler [, changer])
 ```
 
-Including the `changer` argument causes a changer macro to be created. Omitting the argument will create a command macro.
+Including the `changer` argument causes a changer macro to be created. Omitting the argument will create a basic macro.
 
 #### Arguments
 
 - `name` ( *`string`* ) The name to give the macro. For example, the name `"blue"` would create a macro called like this: `(blue:)`. Valid macro names should generally consist of only lowercase Latin letters.
 - `handler` ( *`function`* )  The handler function. For changer macros it is run when the macro is executed, before rendering, and can be used for tasks that need to happen immediately. Not every changer macro will require a handler, pass an empty function `function () {}` if you don't need it. The arguments passed to the macro are passed to the function as arguments. There is also a *macro context* similar (superficially) to SugarCube's macro API that you may access (see below).
-- `changer` ( *`function`* ) ( optional ) The changer function, which is run during the rendering process. Including this argument creates a changer macro, while omitting it creates a command macro. You can access the hook content (called a *descriptor*) from the macro context. Like handlers, macro arguments are passed through.
+- `changer` ( *`function`* ) ( optional ) The changer function, which is run during the rendering process. Including this argument creates a changer macro, while omitting it creates a basic macro. You can access the hook content (called a *descriptor*) from the macro context. Like handlers, macro arguments are passed through.
 
 #### Context Properties
 
@@ -102,7 +102,7 @@ In addition to the above properties, the macro context also has the following me
 {
     name : 'anothermacro',
     args : [1, 2, 'buckle my shoe'],
-    instance : (a ChangerCommand instance) {
+    instance : (a Changerbasic instance) {
         name : 'anothermacro',
         params : [1, 2, 'buckle my shoe'],
         [...]
@@ -118,11 +118,11 @@ In addition to the above properties, the macro context also has the following me
 }
 ```
 
-### Creating Command Macros
+### Creating Basic Macros
 
-Creating command macros is fairly straight forward. 
+Creating basic macros is fairly straight forward. 
 
-Command macros need a name and a handler function and can return values to be used as arguments to other macros or to be displayed to users. For example:
+Basic macros need a name and a handler function and can return values to be used as arguments to other macros or to be displayed to users. For example:
 
 ```javascript
 Harlowe.macro('mymacro', function () {
@@ -230,7 +230,7 @@ Harlowe.macro('log', function () {
 
 ### Creating Changer Macros 
 
-Changer macros are significantly more complex than command macros. Fortunately, most of what applies to command macros also applies to these macros. The biggest difference is that you can't return anything from the handlers of changer macros, and that changer macros have an additional changer function argument that handles most of the actual logic.
+Changer macros are significantly more complex than basic macros. Fortunately, most of what applies to basic macros also applies to these macros. The biggest difference is that you can't return anything from the handlers of changer macros, and that changer macros have an additional changer function argument that handles most of the actual logic.
 
 Let's look at an incredibly basic changer macro, a macro that simply suppresses content.
 

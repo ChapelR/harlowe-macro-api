@@ -16,7 +16,7 @@
         this.name = name || 'unknown';
         this.args = args || [];
         this.data = data || {};
-        this.type = (data && data.type) || 'command';
+        this.type = (data && data.type) || 'basic';
         this.fn = (data && data.fn) || 'handler';
 
         if (this.type === 'changer') {
@@ -36,7 +36,7 @@
             args = [];
         }
         if (!data || typeof data !== 'object') {
-            data = { type : 'command', fn : 'handler' };
+            data = { type : 'basic', fn : 'handler' };
         }
         return new MacroContext(name, args, data);
     };
@@ -91,14 +91,14 @@
         }
     });
 
-    function simpleCommandMacro (name, cb) {
-        // a command macro can not have a hook
+    function simpleMacro (name, cb) {
+        // a basic macro cannot have a hook
         _macros.add(name, function () {
 
             var arr = [].slice.call(arguments).slice(1);
 
             var context = MacroContext.create(name, arr, {
-                type : 'command',
+                type : 'basic',
                 fn : 'handler'
             });
 
@@ -150,7 +150,7 @@
             throw new TypeError('Invalid macro handler.');
         }
         if (changer && typeof changer === 'function') {
-            simpleChangerMacro(name, cb, changer);
+            simplMacro(name, cb, changer);
         } else {
             simpleCommandMacro(name, cb);
         }
