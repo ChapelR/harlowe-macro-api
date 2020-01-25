@@ -14,6 +14,11 @@
     // textbox input macro for Harlowe
     'use strict';
 
+    // set up change event handler
+    $(document).on('change.textbox-macro.macro', 'input[data-var]', function () {
+        Harlowe.variable($(this).attr('data-var').trim(), $(this).val() || '');
+    });
+
     Harlowe.macro('textbox', function (varName, placeholder) {
         // handle errors
         var err = this.typeCheck([
@@ -24,11 +29,6 @@
         ]);
         // throw
         if (err) throw err;
-
-        // set up change event handler
-        $(document).on('change.textbox-macro', 'input[data-var="' + varName + '"]', function () {
-            Harlowe.variable(varName, $(this).val() || '');
-        });
 
         // return html structure
         return '<input placeholder="' + (placeholder || '') + '" type="text" data-var="' + varName + '">';
