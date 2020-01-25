@@ -23,7 +23,7 @@ Including the `changer` argument causes a changer macro to be created. Omitting 
 #### Arguments
 
 - `name` ( *`string`* ) The name to give the macro. For example, the name `"blue"` would create a macro called like this: `(blue:)`. Valid macro names should generally consist of only lowercase Latin letters.
-- `handler` ( *`function`* )  The handler function. For changer macros it is run when the macro is executed, before rendering, and can be used for tasks that need to happen immediately. Not every changer macro will require a handler, pass an empty function `funciton () {}` if you don't need it. The arguments passed to the macro are passed to the function as arguments. There is also a *macro content* similar (superficially) to SugarCube's macro API that you may access (see below).
+- `handler` ( *`function`* )  The handler function. For changer macros it is run when the macro is executed, before rendering, and can be used for tasks that need to happen immediately. Not every changer macro will require a handler, pass an empty function `function () {}` if you don't need it. The arguments passed to the macro are passed to the function as arguments. There is also a *macro context* similar (superficially) to SugarCube's macro API that you may access (see below).
 - `changer` ( *`function`* ) ( optional ) The changer function, which is run during the rendering process. Including this argument creates a changer macro, while omitting it creates a command macro. You can access the hook content (called a *descriptor*) from the macro context. Like handlers, macro arguments are passed through.
 
 #### Context Properties
@@ -205,7 +205,7 @@ This content is visible. (set: $num to 1)
 
 $num <!-- 1 -->
 
-(silently:)[You won't see this disabled content! (set: $b to 3)]
+(silently:)[You won't see this disabled content! (set: $num to 3)]
 
 $num <!-- 1 -->
 ```
