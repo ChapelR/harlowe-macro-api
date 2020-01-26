@@ -150,9 +150,9 @@
             throw new TypeError('Invalid macro handler.');
         }
         if (changer && typeof changer === 'function') {
-            simplMacro(name, cb, changer);
+            simpleChangerMacro(name, cb, changer);
         } else {
-            simpleCommandMacro(name, cb);
+            simpleMacro(name, cb);
         }
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "harlowe-macro-api",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Unofficial Macro API for Twine 2/Harlowe.",
   "main": "build.js",
   "dependencies": {},
