@@ -11,12 +11,37 @@
 
 <tw-story></tw-story>
 
-<!-- UUID://29684286-9874-4F3B-A1F0-A2206575C893// --><tw-storydata name="Custom Macro Testing Suite" startnode="1" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="29684286-9874-4F3B-A1F0-A2206575C893" zoom="1" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "macro.min.js" */
-// Harlowe Macro API, by Chapel; version 0.2.1
+<!-- UUID://29684286-9874-4F3B-A1F0-A2206575C893// --><tw-storydata name="Custom Macro Testing Suite" startnode="1" creator="Tweego" creator-version="2.0.0+089d4ca77e5b" ifid="29684286-9874-4F3B-A1F0-A2206575C893" zoom="1" format="Harlowe" format-version="3.1.0" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">.say {
+    border: 1px solid #eee;
+    overflow: auto;
+    font-size: 1.2rem;
+}
+
+.say img {
+    max-width: 20%;
+    float: left;
+    z-index: 2;
+    margin-right: 1em;
+}
+
+.say p:first-of-type {
+    font-weight: bold;
+    margin: 0.2em 0;
+    border-bottom: 1px solid #eee;
+}
+
+.say p:last-of-type {
+    padding: 0.5em;
+    margin: 0;
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript">/* twine-user-script #1: "macro.min.js" */
+// Harlowe Macro API, by Chapel; version 0.2.2
 ;!function(){"use strict";var c=require("macros"),n=require("state"),r=require("engine"),u=require("datatypes/changercommand");function f(e,r,n){if(!(this instanceof f))return new f(e,r,n);this.name=e||"unknown",this.args=r||[],this.data=n||{},this.type=n&&n.type||"basic",this.fn=n&&n.fn||"handler","changer"===this.type&&("handler"===this.fn?this.instance=n&&n.instance||null:this.descriptor=n&&n.descriptor||null)}function t(e){return"number"==typeof e||"boolean"==typeof e||"string"==typeof e||null===e||Array.isArray(e)&&e.every(t)||e instanceof Set&&Array.from(e).every(t)||e instanceof Map&&Array.from(e.values()).every(t)||u.isPrototypeOf(e)}function a(){return n.passage}f.create=function(e,r,n){if(!e||"string"!=typeof e||!e.trim())throw new TypeError("Invalid macro name.");return r&&r instanceof Array||(r=[]),n&&"object"==typeof n||(n={type:"basic",fn:"handler"}),new f(e,r,n)},Object.assign(f.prototype,{clone:function(){return f.create(this.name,this.args,this.data)},syntax:function(){return"("+this.name+":)"},error:function(e,r){var n="Error in the "+this.syntax()+" macro: "+e;return r&&alert(n),console.warn("HARLOWE CUSTOM MACRO ERROR -> ",n),new Error(e)},typeCheck:function(e){e&&e instanceof Array||(e=[].slice.call(arguments));var a=this,i=[];if(e.forEach(function(e,r){var n=r+1,t=[];"string"==typeof e&&("any"===(t=e.includes("|")?e.split("|").map(function(e){return e.trim().toLowerCase()}):[e.trim().toLowerCase()])[0]||t.some(function(e){return typeof a.args[r]===e})||i.push("argument "+n+" should be a(n) "+t.join(" or ")))}),i.length)return a.error(i.join("; "))}}),window.Harlowe=Object.assign(window.Harlowe||{},{macro:function(e,r,n){if(!e||"string"!=typeof e||!e.trim())throw new TypeError("Invalid macro name.");if(!r||"function"!=typeof r)throw new TypeError("Invalid macro handler.");var t,a,i,o,s;n&&"function"==typeof n?(i=e,o=r,s=n,c.addChanger(i,function(){var e=[].slice.call(arguments).slice(1),r=u.create(i,e),n=f.create(i,e,{type:"changer",fn:"handler",instance:r});return o.apply(n,e),r},function(){var e=[].slice.call(arguments),r=e.shift(),n=f.create(i,e,{type:"changer",fn:"changer",descriptor:r});s.apply(n,e)},c.TypeSignature.zeroOrMore(c.TypeSignature.Any))):(t=e,a=r,c.add(t,function(){var e=[].slice.call(arguments).slice(1),r=f.create(t,e,{type:"basic",fn:"handler"}),n=a.apply(r,e);return null==n?"":n},c.TypeSignature.zeroOrMore(c.TypeSignature.Any)))},passage:a,goto:function(e){return r.goToPassage(e)},variable:function(e,r){if("$"!==e[0])throw new Error('cannot access variable "'+e+'"');if(e=e.substr(1),void 0!==r){if(!t(r))throw new Error('The value passed to variable "'+e+'" cannot be serialized.');n.variables[e]=r}return n.variables[e]},visited:function(e){return n.passageNameVisited(e||a())},hasVisited:function(e){return 0<n.passageNameVisited(e||a())},turns:function(){return n.pastLength},API_ACCESS:{MACROS:c,STATE:n,CHANGER:u,ENGINE:r}})}();
 // end Harlowe Macro API
 /* twine-user-script #2: "articles.js" */
 /*
+    
+    PORTED FROM CMFSC2
+
     (article: text [, capitalize])
 
     Returns the text with the correct article ('a' or 'an') appended.
@@ -210,6 +235,9 @@
 }());
 /* twine-user-script #3: "dice.js" */
 /*
+    
+    PORTED FROM CMFSC2 (somewhat)
+
     (dice: notation)
     (dice: number, sides [, modifier])
 
@@ -313,7 +341,7 @@
             number : n,
             type : t,
             modifier : m
-        }
+        };
     }
 
     function makeRoll (num, type, mod, rnd) {
@@ -420,7 +448,86 @@
     });
 
 }());
-/* twine-user-script #5: "textbox.js" */
+/* twine-user-script #5: "speechbox.js" */
+/*
+    
+    (say: name [, imgSrc])[ ... ]
+
+    Creates a speech box with the indicated character name and image.
+
+    - name ( string ) The name of the character to be displayed in the name portion of the speech box. If there is a 
+        character definition set up via the `(character:)` macro, the image from that definition will be supplied.
+    - imgSrc ( string ) ( optional ) The image source URL, which, if provided, overrides the name definition one. If omitted
+        and there is no definition, no image will be rendered.
+
+    Example:
+        (say: 'Lisa')[Hey there!]
+        (say: 'Bob', 'assets/bob.jpg')[I'm *sick* of being a **meme**!]
+
+    (character: name, imgSrc)
+
+    Creates a character definition to be used in a `(say:)` macro speech box.
+
+    - name ( string ) The name of the character to be associated with the image source.
+    - imgSrc ( string ) The image source URL to associate with the name.
+
+    Example:
+        (character: 'Lisa', 'assets/lisa.jpg')
+
+*/
+
+(function () {
+    // requires speechbox.css
+    'use strict';
+
+    var _characters = new Map();
+
+    function addCharacter (name, imgSrc) {
+        if (!name || typeof name !== 'string' || !name.trim()) {
+            throw new Error('invalid character name');
+        }
+        if (!imgSrc || typeof imgSrc !== 'string' || !imgSrc.trim()) {
+            throw new Error('invalid image source');
+        }
+        _characters.set(name, imgSrc);
+    }
+
+    function speechBox (source, name, imgSrc) {
+        var imgEl = '';
+        if (!name || typeof name !== 'string' || !name.trim()) {
+            throw new Error('invalid character name');
+        }
+        if (!imgSrc) {
+            imgSrc = _characters.get(name);
+        }
+        if (imgSrc) {
+            imgEl = '<img src="' + imgSrc + '">';
+        }
+        return '<div class="say" data-character="' + name + '">' + imgEl+ '<p>' + name + '</p><p>' + source + '</p></div>';
+    }
+
+    Harlowe.macro('character', function (name, imgSrc) {
+        var err = this.typeCheck([
+            'string',
+            'string'
+        ]);
+        if (err) throw err;
+
+        addCharacter(name, imgSrc);
+    });
+
+    Harlowe.macro('say', function () {
+        var err = this.typeCheck([
+            'string',
+            'string|undefined'
+        ]);
+        if (err) throw err;
+    }, function (name, imgSrc) {
+        this.descriptor.source = speechBox(this.descriptor.source, name, imgSrc);
+    });
+
+}());
+/* twine-user-script #6: "textbox.js" */
 /*
     (textbox: receiverVariable [, placeholder])
 
@@ -457,11 +564,13 @@
         return '<input placeholder="' + (placeholder || '') + '" type="text" data-var="' + varName + '">';
     });
 
-}());</script><tw-passagedata pid="1" name="Start" tags="" position="100,100" size="100,100">(set-article: &#39;an&#39;, &#39;throng&#39;)
+}());</script><tw-passagedata pid="1" name="Start" tags="" position="100,100" size="100,100">(set-article: &#39;an&#39;, &#39;throng&#39;)\
+(character: &#39;Lisa&#39;, &#39;assets/lisa.jpg&#39;)\
 [[Textbox|textbox-entry]]
 [[Hot Keys|hotkeys]]
 [[Dice|dice]]
-[[Article|article]]</tw-passagedata><tw-passagedata pid="2" name="footer" tags="footer" position="225,100" size="100,100">(unless: (passage:)&#39;s name is &quot;Start&quot;)[
+[[Article|article]]
+[[Speech Box|speech]]</tw-passagedata><tw-passagedata pid="2" name="footer" tags="footer" position="225,100" size="100,100">(unless: (passage:)&#39;s name is &quot;Start&quot;)[
 ------
 [[Start over|Start]]]</tw-passagedata><tw-passagedata pid="3" name="textbox-entry" tags="" position="350,100" size="100,100">(set: $name to &#39;&#39;)\
 (textbox: &#39;$name&#39;, &#39;Please enter your name...&#39;)
@@ -501,7 +610,11 @@
 (article: &#39;idol&#39;)
 
 This one is wrong on purpose so we could test the override macro:
-(article: &#39;throng&#39;)</tw-passagedata></tw-storydata>
+(article: &#39;throng&#39;)</tw-passagedata><tw-passagedata pid="8" name="speech" tags="" position="975,100" size="100,100">Speech box tests.
+
+(say: &#39;Lisa&#39;)[Hey there!]
+
+(say: &#39;Bob&#39;, &#39;assets/bob.jpg&#39;)[I&#39;m *sick* of being a **meme**!]</tw-passagedata></tw-storydata>
 
 <script title="Twine engine code" data-main="harlowe">"use strict";function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}var _slicedToArray=function(){function e(e,t){var n=[],r=!0,i=!1,o=void 0;try{for(var a,s=e[Symbol.iterator]();!(r=(a=s.next()).done)&&(n.push(a.value),!t||n.length!==t);r=!0);}catch(e){i=!0,o=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw o}}return n}return function(t,n){if(Array.isArray(t))return t;if(Symbol.iterator in Object(t))return e(t,n);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};!function(){/**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
