@@ -27,15 +27,11 @@ Find releases on [the releases page](https://github.com/ChapelR/harlowe-macro-ap
   - [Other APIs](#other-apis)
 
     - [Function: `Harlowe.passage()`](#function-harlowe.passage)
-
+- [Function: `Harlowe.tags()`](#function-harlowe.tags)
     - [Function: `Harlowe.goto()`](#function-harlowe.goto)
-
-    - [Function: `Harlowe.variable()`](#function-harlowe.variable)
-
+- [Function: `Harlowe.variable()`](#function-harlowe.variable)
     - [Function: `Harlowe.visited()`](#function-harlowe.visited)
-
-    - [Function: `Harlowe.hasVisited()`](#function-harlowe.hasvisited)
-
+- [Function: `Harlowe.hasVisited()`](#function-harlowe.hasvisited)
     - [Function: `Harlowe.turns()`](#function-harlowe.turns)
 
   - [API_ACCESS](#api_access)
@@ -326,6 +322,30 @@ Harlowe.passage()
 
 ```javascript
 console.log(Harlowe.passage()); // logs the name of the current passage to console
+```
+
+### Function: Harlowe.tags()
+
+Returns the tags, as an array, of the indicated passage
+
+#### Syntax
+
+```javascript
+Harlowe.tags([passage])
+```
+
+#### Arguments
+
+- `passage` ( *`string`* ) ( optional )The name of a passage. If none is provided, defaults to the current passage.
+
+#### Returns
+
+( *`string array`* ) An array of passage tags.
+
+#### Examples
+
+```javascript
+console.log(Harlowe.tags()); // logs the tags of the current passage to the console
 ```
 
 ### Function: Harlowe.goto()

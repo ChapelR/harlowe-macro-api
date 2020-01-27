@@ -1,5 +1,14 @@
 ## Pre-release Versions
 
+### v0.3.0
+
+- **[Update]** Internal improvements.
+- **[Update]** Added the `Harlowe.tags()` method.
+- **[Examples]** Added two more examples:
+  - `(say:)`/`(character:)` A port of the CMFSC2 speech box system.
+  - `(playtime:)` A simplified port of the CMFSC2 playtime system.
+- **[Docs]** Demo and docs updates.
+
 ### v0.2.2
 
 - **[Update]** Internal improvements and bug fixes.

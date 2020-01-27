@@ -8,6 +8,7 @@ const jetpack = require('fs-jetpack'),
     scriptName = 'Harlowe Macro API',
     file = 'macro.js',
     dist = 'dist/macro.min.js',
+    examples = 'examples/',
     binary = 'harlowe-macro-api.zip';
 
 function build (path, output) {
@@ -26,6 +27,33 @@ function build (path, output) {
 
 }
 
+function minifyExamples (ex) {
+    const jsFiles = jetpack.find(ex, {
+        matching : '*.js',
+        recursive : false
+    });
+    
+    jsFiles.forEach( function (file) {
+        const source = jetpack.read(file),
+            path = file.split(/[\\\/]/g),
+            name = path.pop().split('.').join('.min.');
+        let result, ret;
+        
+        result = uglify.minify(source);
+        
+        console.log(result.error);
+        
+        path.unshift('.');
+        path.push('minified');
+        path.push(name);
+        path = path.join('/');
+        
+        ret = '// ' + name + ', for Harlow Macro API, by Chapel\n;' + result.code + '\n// end ' + name; 
+        
+        jetpack.write(path, ret, {atomic : true});
+    });
+}
+
 function zipUp (path, output) {
     const min = jetpack.read(path, 'utf8');
     const license = jetpack.read('LICENSE', 'utf8');
@@ -40,4 +68,5 @@ function zipUp (path, output) {
 }
 
 build(file, dist);
+minifyExamples(examples);
 zipUp(dist, binary);

@@ -170,8 +170,16 @@
     function passage () {
         return _state.passage;
     }
-    function goto (passage) {
-        return _engine.goToPassage(passage);
+    function tags (name) {
+        name = name || passage();
+        var tagsString = $('tw-passagedata[name="' + name + '"]').attr('tags');
+        if (tagsString) {
+            return tagsString.split(' ');
+        }
+        return [];
+    }
+    function goto (name) {
+        return _engine.goToPassage(name);
     }
     function variable (name, set) {
         if (name[0] !== '$') {
@@ -200,6 +208,7 @@
     window.Harlowe = Object.assign(window.Harlowe || {}, {
         macro : macro,
         passage : passage,
+        tags : tags,
         goto : goto,
         variable : variable,
         visited : visited,
