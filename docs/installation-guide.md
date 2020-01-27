@@ -1,6 +1,6 @@
 # Installation Guide
 
-This is a guide for installing the custom macro API. The custom macro API itself does **not** include any custom macros, it is instead a resource to allow for the creation of custom macros. If you want to create your own custom macros, refer to the [documentation](README.md).
+This is a guide for installing the custom macro framework. The custom macro framework itself does **not** include any custom macros, it is instead a resource to allow for the creation of custom macros. If you want to create your own custom macros, refer to the [documentation](README.md).
 
 ## Step 1: Get the Code
 

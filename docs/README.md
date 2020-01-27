@@ -1,22 +1,20 @@
-# Chapel's Unofficial Custom Macro API for Harlowe
+# Chapel's Unofficial Custom Macro Framework for Harlowe
 
-> Looking for macros to actually use? Look [over here](examples/main).
-
-This code adds (more accurately recreates) a macro API to Harlowe to allow users to create and distribute custom macros. Place the contents of `macro.min.js` into your story JavaScript and use the API as described below to create macros. Generally speaking, the code of `macro.min.js` should be the first thing in your JavaScript section in Twine 2, or the first JS file compiled by your compiler.
+This code adds (more accurately recreates) a macro API for Harlowe to allow users to create and distribute custom macros. Download [the latest release](https://github.com/ChapelR/harlowe-macro-api/releases) and place the contents of `macro.js` into your story JavaScript and use the framework as described below to create macros. Generally speaking, this code should be the first thing in your JavaScript section in Twine 2, or the first JS file compiled by your compiler.
 
 This is unofficial code, and relies on hacks. Future versions of Harlowe may break it at any time. Intended for Harlowe 3. May work in Harlowe 1 or 2, but bugs or issues in those versions of Harlowe **will not be fixed**.
 
 This documentation is intended for people who *make* custom macros, so it may be a bit technical. If you were sent here by some script written by some author and can't figure out what to do, go [here](installation-guide.md). It is recommended that macro creators similarly point their end users to the installation guide linked above rather than to this README or the repo in general.
 
-See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). 
+If you are looking for custom macros you can use, [install the framework](installation-guide.md) and then check out the [macros page](examples/main).
 
-Find releases on [the releases page](https://github.com/ChapelR/harlowe-macro-api/releases) and report issues on the [issues page](https://github.com/ChapelR/harlowe-macro-api/issues).
+See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). 
 
 ## Contents
 
 - [Installation Guide](installation-guide.md)
-
-- Documentation
+- [Macro Collection](examples/main)
+- Framework Documentation
 
   - [Macro API](#macro-api)
 
@@ -29,22 +27,23 @@ Find releases on [the releases page](https://github.com/ChapelR/harlowe-macro-ap
   - [Other APIs](#other-apis)
 
     - [Function: `Harlowe.passage()`](#function-harlowe.passage)
-- [Function: `Harlowe.tags()`](#function-harlowe.tags)
+    
+    - [Function: `Harlowe.tags()`](#function-harlowe.tags)
+    
     - [Function: `Harlowe.goto()`](#function-harlowe.goto)
-- [Function: `Harlowe.variable()`](#function-harlowe.variable)
+    
+    - [Function: `Harlowe.variable()`](#function-harlowe.variable)
+    
     - [Function: `Harlowe.visited()`](#function-harlowe.visited)
-- [Function: `Harlowe.hasVisited()`](#function-harlowe.hasvisited)
+    - [Function: `Harlowe.hasVisited()`](#function-harlowe.hasvisited)
     - [Function: `Harlowe.turns()`](#function-harlowe.turns)
-
+  
   - [API_ACCESS](#api_access)
-
   - [Unsolicited Advice for Macro Creators](#unsolicited-advice-for-macro-creators)
-
 - [Examples](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples)
-
 - [Releases and Downloads](https://github.com/ChapelR/harlowe-macro-api/releases)
-
 - [Issue Tracker](https://github.com/ChapelR/harlowe-macro-api/issues)
+- [Release Notes](https://twinelab.net/blog/tags/harlowe-macros/)
 
 ## Macro API
 
