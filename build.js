@@ -9,17 +9,19 @@ const jetpack = require('fs-jetpack'),
     fs = require('fs'),
     version = require('./package.json').version,
     scriptName = 'Harlowe Macro Framework',
-    file = 'macro.js',
+    src = 'src/',
     dist = 'dist/macro.min.js',
     examples = 'examples/',
     binary = 'harlowe-macro-api.zip';
 
 function build (path, output) {
     
-    const source = jetpack.read(path);
+    const source = jetpack.find(path, { matching : '*.js' })
+        .map(file => jetpack.read(file, 'utf8')).join('\n\n');
+
     let result, ret;
     
-    result = uglify.minify(source);
+    result = uglify.minify('(function () {\n' + source + '\n}());');
     
     if (result.error) {
         console.warn(scriptName, result.error);
@@ -106,7 +108,7 @@ function zipUp (path, output) {
     fs.writeFileSync(output, bin, 'binary');
 }
 
-build(file, dist);
+build(src, dist);
 minifyExamples(examples);
 minifyCSS(examples);
 zipUp(dist, binary);
