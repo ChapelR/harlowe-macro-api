@@ -9,7 +9,7 @@
         // a basic macro cannot have a hook
         _macros.add(name, function () {
 
-            var arr = [].slice.call(arguments).slice(1);
+            var arr = Harlowe.helpers.arrayify(arguments, 1);
 
             var context = Harlowe.MacroContext.create(name, arr, {
                 type : 'basic',
@@ -28,7 +28,7 @@
         // a simplified changer macro
         _macros.addChanger(name, function () {
 
-            var arr = [].slice.call(arguments).slice(1);
+            var arr = Harlowe.helpers.arrayify(arguments, 1);
             var changer = _changer.create(name, arr);
 
             var context = Harlowe.MacroContext.create(name, arr, {
@@ -42,7 +42,7 @@
 
         }, function () {
 
-            var arr = [].slice.call(arguments);
+            var arr = arrayify(arguments);
             var d = arr.shift();
 
             var context = Harlowe.MacroContext.create(name, arr, {

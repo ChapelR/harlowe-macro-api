@@ -56,7 +56,7 @@
         // check types of args: `this.typeCheck(['string|number', 'any'])`
         typeCheck : function (types) {
             if (!types || !(types instanceof Array)) {
-                types = [].slice.call(arguments);
+                types = Harlowe.helpers.arrayify(arguments);
             }
             var self = this;
             var check = [];

@@ -14,9 +14,21 @@
             _changer.isPrototypeOf(variable));
     }
 
+    function arrayify (arraylike, splitOff) {
+        if (!arraylike) {
+            return;
+        }
+        var ret = [].slice.call(arraylike);
+        if (splitOff !== undefined) {
+            ret = ret.slice(splitOff);
+        }
+        return ret;
+    }
+
     window.Harlowe = Object.assign(window.Harlowe, {
         helpers : {
-            isSerialisable : isSerialisable
+            isSerialisable : isSerialisable,
+            arrayify : arrayify
         }
     });
 }());
