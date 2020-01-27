@@ -67,3 +67,23 @@ Nothing.
 (character: 'Lisa', 'assets/lisa.jpg')
 ```
 
+### Styling Options
+
+The generated HTML structure of the speech box element looks something like this:
+
+```html
+<div class="say">
+    <img src="[imageSrc]">
+    <p>[Name]</p>
+    <p>[Content]</p>
+</div>
+```
+
+The `.say` `<div>` is also given an attribute `data-character`,  that holds the character's name string, for per-character styling.
+
+Selectors you may want to target:
+
+- `.say`: the container and outer element.
+- `.say img`: the portrait.
+- `.say p:first-of-type`: the name text.
+- `.say p:last-of-type`: the dialogue content text.
