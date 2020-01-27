@@ -1,5 +1,5 @@
 /*
-    (hotkey: keycode [, once])
+    (hotkey: keycode [, once])[ ... ]
 
     Fires the first link inside the associated hook with a press of the indicated key.
 

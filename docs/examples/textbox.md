@@ -1,41 +1,45 @@
-## Dice
+## Textbox
 
-A simple dice roller for Harlowe that can accept discreet numbers or dice notation (e.g., `1d6+1`). Ported over from [CMFSC2](http://macros.twinelab.net/). The roller down not merely select a random between the minimum and maximum but instead simulates each roll to produce realistically weighted results.
+A textbox macro. For Harlowe. Fuck `(prompt:)`.
 
 > **Get the Code**
 >
-> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/dice.min.js) 
-> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/dice.js)
+> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/textbox.min.js) 
+> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/textbox.js)
 
-### Macro: `(dice:)`
+### Macro: `(textbox:)`
 
-Rolls the indicated type of dice in the indicated quantity and optionally adds (or subtracts) a modifier from the roll then returns the result.
+Enter a variable **in quotes** to save the user input in, optional placeholder text, and bam, you have a text input.
 
 #### Syntax
 
 ```
-(dice: notation)
-(dice: number, sides [, modifier])
+(textbox: receiverVariable [, placeholder])
 ```
 
 #### Arguments
 
-- `notation` ( *`string`* ) A string of valid dice notation, e.g., `"1d6"`, `"3d8+3"`, `"2d10 - 2"`, etc. Fate/Fudge dice are also supported (e.g., `"3dF"`).
-- `number` ( *`number`* ) The number of dice to roll.
-- `sides` ( *`number`* | *`string`* ) The sides or type of dice to roll (`"F"` is the only accepted string value).
-- `modifier` ( *`number`* ) ( optional ) The modifier; a flat number to add to the dice roll. May be negative to represent a subtraction.
+- `receiverVariable` ( *`string`* ) A string of a variable; that is a variable name in quotes. Must be a story variable, not a temporary variable. For example, `"$name"`.
+- `placeholder` ( *`string`* ) ( optional ) Text that appears whenever the box is empty, usually providing some hint as to what the textbox is for, e.g., `"Enter your name..."`.
 
 #### Returns
 
-( *`number`* ) The result of the roll.
+Nothing.
 
 #### Examples
 
 ```
-<!-- all of the following roll 3 six-sided dice and add 10: -->
-(set: _roll to (dice: '3d6+10'))
-(set: _roll to (dice: '3d6 + 10'))
-(set: _roll to (dice: 3, 6, 10))
-(set: _roll to (dice: 3, 6) + 10)
+(set: $name to '')\
+(textbox: '$name', 'Please enter your name...')
+
+{
+(link-repeat: 'Submit')[
+    (if: $name is '')[
+        (replace: ?error)[Please enter a name.]
+    ](else:)[
+        (goto: 'textbox-name')
+    ]
+] []<error|
+}
 ```
 

@@ -1,5 +1,7 @@
 # Chapel's Unofficial Custom Macro API for Harlowe
 
+> Looking for macros to actually use? Look [over here](examples/main).
+
 This code adds (more accurately recreates) a macro API to Harlowe to allow users to create and distribute custom macros. Place the contents of `macro.min.js` into your story JavaScript and use the API as described below to create macros. Generally speaking, the code of `macro.min.js` should be the first thing in your JavaScript section in Twine 2, or the first JS file compiled by your compiler.
 
 This is unofficial code, and relies on hacks. Future versions of Harlowe may break it at any time. Intended for Harlowe 3. May work in Harlowe 1 or 2, but bugs or issues in those versions of Harlowe **will not be fixed**.

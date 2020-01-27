@@ -1,41 +1,69 @@
-## Dice
+## Speech Box
 
-A simple dice roller for Harlowe that can accept discreet numbers or dice notation (e.g., `1d6+1`). Ported over from [CMFSC2](http://macros.twinelab.net/). The roller down not merely select a random between the minimum and maximum but instead simulates each roll to produce realistically weighted results.
+A basic speech box macro. Ported over from [CMFSC2](http://macros.twinelab.net/). You can pre-define characters to associate with certain image sources, or supply both to the `(say:)` macro when you use it, or totally forgo images.
+
+![Speech box example](speechbox.jpg)
 
 > **Get the Code**
 >
-> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/dice.min.js) 
-> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/dice.js)
+> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/speechbox.min.js) 
+> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/speechbox.js)
+>
+> **Required CSS**
+>
+> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/speechbox.min.css) 
+> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/speechbox.css)
 
-### Macro: `(dice:)`
+### Macro: `(say:)`
 
-Rolls the indicated type of dice in the indicated quantity and optionally adds (or subtracts) a modifier from the roll then returns the result.
+Creates a speech box with the indicated character name and image. Place the text the character should be saying in the attached hook.
 
 #### Syntax
 
 ```
-(dice: notation)
-(dice: number, sides [, modifier])
+(say: name [, imgSrc])[ ... ]
 ```
 
 #### Arguments
 
-- `notation` ( *`string`* ) A string of valid dice notation, e.g., `"1d6"`, `"3d8+3"`, `"2d10 - 2"`, etc. Fate/Fudge dice are also supported (e.g., `"3dF"`).
-- `number` ( *`number`* ) The number of dice to roll.
-- `sides` ( *`number`* | *`string`* ) The sides or type of dice to roll (`"F"` is the only accepted string value).
-- `modifier` ( *`number`* ) ( optional ) The modifier; a flat number to add to the dice roll. May be negative to represent a subtraction.
+- `name` ( *`string`* ) The name of the character to be displayed in the name portion of the speech box. If there is a character definition set up via the `(character:)` macro, the image from that definition will be supplied.
+- `imgSrc` ( *`string`* ) ( optional ) The image source URL, which, if provided, overrides the name definition one. If omitted and there is no definition, no image will be rendered.
 
 #### Returns
 
-( *`number`* ) The result of the roll.
+Nothing.
 
 #### Examples
 
 ```
-<!-- all of the following roll 3 six-sided dice and add 10: -->
-(set: _roll to (dice: '3d6+10'))
-(set: _roll to (dice: '3d6 + 10'))
-(set: _roll to (dice: 3, 6, 10))
-(set: _roll to (dice: 3, 6) + 10)
+(say: 'Lisa')[Hey there!]
+(say: 'Bob', 'assets/bob.jpg')[I'm *sick* of being a **meme**!]
+```
+
+### Macro: `(character:)`
+
+Associates a character name with an image source to be used in a `(say:)` macro speech box. Saves you from needing to type the image source repeatedly for commonly used or major characters.
+
+!> The **best** place for a call to the `(character:)` macro is a [`startup`-tagged passage](https://twine2.neocities.org/#passagetag_startup).
+
+#### Syntax
+
+```
+(character: name, imgSrc)
+```
+
+#### Arguments
+
+- `name` ( *`string`* ) The name of the character to be associated with the image source.
+- `imgSrc` ( *`string`* ) The image source URL to associate with the name.
+
+#### Returns
+
+Nothing.
+
+#### Examples
+
+```
+(character: 'Lisa', 'assets/lisa.jpg')
 ```
 

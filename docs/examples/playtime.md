@@ -1,41 +1,43 @@
-## Dice
+## Playtime
 
-A simple dice roller for Harlowe that can accept discreet numbers or dice notation (e.g., `1d6+1`). Ported over from [CMFSC2](http://macros.twinelab.net/). The roller down not merely select a random between the minimum and maximum but instead simulates each roll to produce realistically weighted results.
+A simplified playtime tracking system ported over from [CMFSC2](http://macros.twinelab.net/). Keeps track of the amount of time the player has been playing across the entire game, and is preserved across saves.
 
 > **Get the Code**
 >
-> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/dice.min.js) 
-> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/dice.js)
+> - [Minified](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/minified/playtime.min.js) 
+> - [Pretty](https://github.com/ChapelR/harlowe-macro-api/blob/master/examples/playtime.js)
 
-### Macro: `(dice:)`
+### Macro: `(playtime:)`
 
-Rolls the indicated type of dice in the indicated quantity and optionally adds (or subtracts) a modifier from the roll then returns the result.
+Returns or displays the playtime. You can pass in a string to indicate that you'd like a *specific* part of the playtime, like just the hours or just the minutes.
 
 #### Syntax
 
 ```
-(dice: notation)
-(dice: number, sides [, modifier])
+(playtime: [what])
 ```
 
 #### Arguments
 
-- `notation` ( *`string`* ) A string of valid dice notation, e.g., `"1d6"`, `"3d8+3"`, `"2d10 - 2"`, etc. Fate/Fudge dice are also supported (e.g., `"3dF"`).
-- `number` ( *`number`* ) The number of dice to roll.
-- `sides` ( *`number`* | *`string`* ) The sides or type of dice to roll (`"F"` is the only accepted string value).
-- `modifier` ( *`number`* ) ( optional ) The modifier; a flat number to add to the dice roll. May be negative to represent a subtraction.
+- `what` ( *`string`* ) ( optional ) You can return a specific value, or a string, formatted or not. Valid values are: 
+  - `"hours"` returns the hours
+     - `"minutes"` returns the minutes
+  - `"seconds"` returns the seconds
+  - `"milliseconds"` returns the milliseconds elapsed
+  - `"format"` returns a formatted time string--the hours and minutes are bolded
+  - omitting this argument results in a non-bolded string      
 
 #### Returns
 
-( *`number`* ) The result of the roll.
+( *`number`* | *`string`* ) The playtime string, optionally formatted, or the indicated numerical value.
 
 #### Examples
 
 ```
-<!-- all of the following roll 3 six-sided dice and add 10: -->
-(set: _roll to (dice: '3d6+10'))
-(set: _roll to (dice: '3d6 + 10'))
-(set: _roll to (dice: 3, 6, 10))
-(set: _roll to (dice: 3, 6) + 10)
+Playtime: (playtime: 'format')
+Hours: (playtime: 'hours')
+Seconds: (playtime: 'seconds')
+
+Self-updating playtime: (live: 1s)[(playtime:)]
 ```
 
