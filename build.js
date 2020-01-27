@@ -1,7 +1,10 @@
-// jshint environment: node, esversion: 9
+// jshint esversion: 9
 
 const jetpack = require('fs-jetpack'),
     uglify = require('uglify-js'),
+    postcss = require('postcss'),
+    autoprefix = require('autoprefixer'),
+    cleancss = require('postcss-clean'),
     zip = require('node-zip')(),
     fs = require('fs'),
     version = require('./package.json').version,
@@ -13,13 +16,16 @@ const jetpack = require('fs-jetpack'),
 
 function build (path, output) {
     
-    const source = jetpack.read(path),
-        name = path.split('.').join('.min.');
+    const source = jetpack.read(path);
     let result, ret;
     
     result = uglify.minify(source);
     
-    console.log(result.error);
+    if (result.error) {
+        console.warn(scriptName, result.error);
+    } else {
+        console.log('\x1b[36m', 'All clear: "' + scriptName + '"');
+    }
     
     ret = '// ' + scriptName + ', by Chapel; version ' + version + '\n;' + result.code + '\n// end ' + scriptName; 
     
@@ -34,14 +40,18 @@ function minifyExamples (ex) {
     });
     
     jsFiles.forEach( function (file) {
-        const source = jetpack.read(file),
-            path = file.split(/[\\\/]/g),
-            name = path.pop().split('.').join('.min.');
-        let result, ret;
+        const source = jetpack.read(file);
+        let path = file.split(/[\\\/]/g),
+            name = path.pop().split('.').join('.min.'),
+            result, ret;
         
         result = uglify.minify(source);
         
-        console.log(result.error);
+        if (result.error) {
+            console.warn(name, result.error);
+        } else {
+            console.log('\x1b[36m', 'All clear: "' + name + '"');
+        }
         
         path.unshift('.');
         path.push('minified');
@@ -51,6 +61,35 @@ function minifyExamples (ex) {
         ret = '// ' + name + ', for Harlow Macro API, by Chapel\n;' + result.code + '\n// end ' + name; 
         
         jetpack.write(path, ret, {atomic : true});
+    });
+}
+
+function minifyCSS (ex) {
+    const cssFiles = jetpack.find(ex, {
+        matching : '*.css',
+        recursive : false
+    });
+    
+    cssFiles.forEach( function (file) {
+        const source = jetpack.read(file);
+        let path = file.split(/[\\\/]/g),
+            name = path.pop().split('.').join('.min.');
+
+        path.unshift('.');
+        path.push('minified');
+        path.push(name);
+        path = path.join('/');
+        
+        postcss([ autoprefix(), cleancss() ]).process(source, { from : undefined }).then(result => {
+            result.warnings().forEach(warn => {
+                console.warn(name, warn.toString());
+            });
+            console.log('\x1b[36m', 'All clear: "' + name + '"');
+            const ret = '/* ' + name + ', for Harlow Macro API, by Chapel */\n' + result.css + '\n/* end ' + name + '*/';
+            jetpack.write(path, ret, {atomic : true});
+        });
+        
+        
     });
 }
 
@@ -69,4 +108,5 @@ function zipUp (path, output) {
 
 build(file, dist);
 minifyExamples(examples);
+minifyCSS(examples);
 zipUp(dist, binary);

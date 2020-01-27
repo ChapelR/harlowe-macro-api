@@ -7,7 +7,8 @@
 - **[Examples]** Added two more examples:
   - `(say:)`/`(character:)` A port of the CMFSC2 speech box system.
   - `(playtime:)` A simplified port of the CMFSC2 playtime system.
-- **[Docs]** Demo and docs updates.
+- **[Docs]** Documented example macros.
+- **[Meta]** Added minified versions of example macros.
 
 ### v0.2.2
 
