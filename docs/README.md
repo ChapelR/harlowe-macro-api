@@ -18,7 +18,7 @@ See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tre
 
   - [Macro API](#macro-api)
 
-    - [Function: `Harlowe.macro()`](#function-harlowe.macro)
+    - [Function: `Harlowe.macro()`](#function-harlowemacro)
 
     - [Creating Basic Macros](#creating-basic-macros)
 
@@ -26,17 +26,17 @@ See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tre
 
   - [Other APIs](#other-apis)
 
-    - [Function: `Harlowe.passage()`](#function-harlowe.passage)
+    - [Function: `Harlowe.passage()`](#function-harlowepassage)
     
-    - [Function: `Harlowe.tags()`](#function-harlowe.tags)
+    - [Function: `Harlowe.tags()`](#function-harlowetags)
     
-    - [Function: `Harlowe.goto()`](#function-harlowe.goto)
+    - [Function: `Harlowe.goto()`](#function-harlowegoto)
     
-    - [Function: `Harlowe.variable()`](#function-harlowe.variable)
+    - [Function: `Harlowe.variable()`](#function-harlowevariable)
     
-    - [Function: `Harlowe.visited()`](#function-harlowe.visited)
-    - [Function: `Harlowe.hasVisited()`](#function-harlowe.hasvisited)
-    - [Function: `Harlowe.turns()`](#function-harlowe.turns)
+    - [Function: `Harlowe.visited()`](#function-harlowevisited)
+    - [Function: `Harlowe.hasVisited()`](#function-harlowehasvisited)
+    - [Function: `Harlowe.turns()`](#function-harloweturns)
   
   - [API_ACCESS](#api_access)
   - [Unsolicited Advice for Macro Creators](#unsolicited-advice-for-macro-creators)
