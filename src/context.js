@@ -1,5 +1,21 @@
 // jshint browser: true, esversion: 5
 
+/*
+    Harlowe.MacroContext() constructor -> creates an instance to be used as a `this` context for macro execution; 
+        given to the functions called by macro definitions whenever a custom macro is invoked
+
+    Harlowe.MacroContext.create(name, args, data) -> creates and returns a new MacroContext instance
+        - name : name of the macro being invoked
+        - args : array of arguments passed into the macro invocation
+        - data : an object containing additional invocation properties
+
+    context#clone() -> returns a deep copy of the context instance
+    context#syntax() -> returns the macro's name wrapped with harlower syntax elements, e.g. 'test' -> '(test:)'
+    context#error(msg [, alert]) -> creates an error and returns it; optionally creates an alert
+    context#typeCheck(typeList) -> parses a list of argument types and checks them against passsed args.
+        if a mismatch is found an error is generated and returned, otherwise nothing (undefined) is returned.
+*/
+
 (function () {
     'use strict';
     

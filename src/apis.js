@@ -1,13 +1,32 @@
 // jshint browser: true, esversion: 5
 
+/*
+    Harlowe.version -> version data object
+        { // all are replaced by package.json values during build
+            major,
+            minor,
+            patch
+        }
+
+    Harlowe.version.semantic() -> returns the semantic version as a string, e.g. "1.0.0"
+
+    Harlowe.API_ACCESS -> access to internal engined APIs
+        {
+            MACROS
+            STATE
+            ENGINE
+            CHANGER
+        }
+*/
+
 (function () {
     'use strict';
     var _version = Object.freeze({
-        major : 0,
-        minor : 4,
-        patch : 0,
+        major : /{{major}}/,
+        minor : /{{minor}}/,
+        patch : /{{patch}}/,
         semantic : function () {
-            return [this.major, this.minor, this.patch].join('.');
+            return [ this.major, this.minor, this.patch ].join('.');
         }
     });
 

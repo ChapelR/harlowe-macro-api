@@ -1,5 +1,16 @@
 // jshint browser: true, esversion: 5
 
+/*
+    Harlowe.passage() -> returns the current passage
+    Harlowe.tags([passage]) -> returns the tags, as an array, for the indicated passage; defaults to current passage
+    Harlowe.goto(passage) -> forwards to indicated passage, as (goto:)
+    Harlowe.variable(varName [, setter]) -> gets, and optionally sets, the indicated story variable (include sigil)
+    Harlowe.visited([passage]) -> returns the number of times the indicated passage was visited; 
+        defaults to current passage
+    Harlowe.hasVisited([passage]) -> returns whether the indicated passage was visited; defaults to current passage
+    Harlowe.turns() -> returns the number of turns that have passed (past moments only)
+*/
+
 (function () {
     'use strict';
 
@@ -11,11 +22,16 @@
     }
     function tags (name) {
         name = name || passage();
-        var tagsString = $('tw-passagedata[name="' + name + '"]').attr('tags');
-        if (tagsString) {
-            return tagsString.split(' ');
+        try {
+            var tagsString = Harlowe.helpers.getPassageData(name).attr('tags');
+            if (tagsString) {
+                return tagsString.split(' ');
+            }
+            return [];
+        } catch (err) {
+            console.warn(err.message);
+            return [];
         }
-        return [];
     }
     function goto (name) {
         return _engine.goToPassage(name);

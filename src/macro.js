@@ -1,5 +1,12 @@
 // jshint browser: true, esversion: 5
 
+/*
+    Harlowe.macro(name, handler [, changer]) -> creates a new macro with the given name. if a changer is passed,
+        the macro is automatically registered as a changer macro and can be attached to hooks the handler and 
+        changer functions are provided with arguments from the macro invocation, and an execution context provided
+        by a MacroContext instance created at the time of the macro's invocation.
+*/
+
 (function () {
     'use strict';
 

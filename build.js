@@ -16,8 +16,15 @@ const jetpack = require('fs-jetpack'),
 
 function build (path, output) {
     
-    const source = jetpack.find(path, { matching : '*.js' })
+    let source = jetpack.find(path, { matching : '*.js' })
         .map(file => jetpack.read(file, 'utf8')).join('\n\n');
+
+    let versionParts = version.split('.');
+
+    source = source
+        .replace("/{{major}}/", versionParts[0])
+        .replace("/{{minor}}/", versionParts[1])
+        .replace("/{{patch}}/", versionParts[2]);
 
     let result, ret;
     

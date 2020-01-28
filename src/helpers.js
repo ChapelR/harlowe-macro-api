@@ -1,5 +1,14 @@
 // jshint browser: true, esversion: 5
 
+/*
+    Harlowe.helpers.isSerialisable(data) -> returns wehther the indicated data can be serialized by Harlowe
+
+    Harlowe.helpers.arrayify(arraylike [, slice]) -> turns an array-like object (like function arguments) into
+        an array and returns it. optionally slices the array starting at the passed index.
+
+    Harlowe.helpers.getPassageData(name) -> returns the indicated passage's data chunk, as a jQuery instance
+*/
+
 (function () {
     'use strict';
     // helper functions
@@ -25,10 +34,18 @@
         return ret;
     }
 
+    function getPassageData (name) {
+        var $psg = $('tw-passagedata[name="' + name + '"]');
+        if ($psg[0]) {
+            return $psg;
+        }
+    }
+
     window.Harlowe = Object.assign(window.Harlowe, {
         helpers : {
             isSerialisable : isSerialisable,
-            arrayify : arrayify
+            arrayify : arrayify,
+            getPassageData : getPassageData
         }
     });
 }());
