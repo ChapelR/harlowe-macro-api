@@ -2,21 +2,24 @@
 
 (function () {
     'use strict';
-    
-    // get the APIs: we have to do this in a blocking manner--failure to do so will cause order of operations problems later
-    var _macros = require('macros');
-    var _state = require('state');
-    var _engine = require('engine');
-    var _changer = require('datatypes/changercommand');
+    var _version = Object.freeze({
+        major : 0,
+        minor : 4,
+        patch : 0,
+        semantic : function () {
+            return [this.major, this.minor, this.patch].join('.');
+        }
+    });
 
     window.Harlowe = window.Harlowe || {};
 
     window.Harlowe = Object.assign(window.Harlowe, {
+        version : _version,
         API_ACCESS : {
-            MACROS : _macros,
-            STATE : _state,
-            CHANGER : _changer,
-            ENGINE : _engine
+            MACROS : require('macros'),
+            STATE : require('state'),
+            CHANGER : require('datatypes/changercommand'),
+            ENGINE : require('engine')
         }
     });
 }());
