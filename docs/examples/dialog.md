@@ -26,7 +26,7 @@ This macro opens the dialog box and adds the indicated title and classes, if any
 
 #### Arguments
 
-- `title` ( *`string`* ) ( optional ) The string to render into the title area of the dialog. If omitted, the title area will still be present, but be remain blank.
+- `title` ( *`string`* ) ( optional ) The string to render into the title area of the dialog. If omitted, the title area will still be present, just blank.
 - `classList` ( *`string`* | *`string array`* ) ( optional ) You may pass a single string of space separated class names (e.g. `"my-class another-class a-third-class"`), an array of strings, or simply list several different strings as arguments to the macro to have them added to the `#dialog-frame` element of the dialog box (see below) for styling.
 
 #### Returns
