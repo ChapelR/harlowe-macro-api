@@ -10,6 +10,8 @@ The following are some example macros created by me using this framework. They'r
 - [Playtime](/examples/playtime)
 - [Speech Box](/examples/speechbox)
 - [Textbox](/examples/textbox)
+- [Dialog](/examples/dialog)
+- [Clamp](/examples/clamp)
 
 ## Installation
 

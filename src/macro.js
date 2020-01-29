@@ -11,6 +11,7 @@
     'use strict';
 
     var _macros = Harlowe.API_ACCESS.MACROS;
+    var _changer = Harlowe.API_ACCESS.CHANGER;
 
     function simpleMacro (name, cb) {
         // a basic macro cannot have a hook
@@ -49,7 +50,7 @@
 
         }, function () {
 
-            var arr = arrayify(arguments);
+            var arr = Harlowe.helpers.arrayify(arguments);
             var d = arr.shift();
 
             var context = Harlowe.MacroContext.create(name, arr, {
