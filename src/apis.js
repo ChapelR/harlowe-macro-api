@@ -30,6 +30,23 @@
         }
     });
 
+    var $dataChunk = $('tw-storydata');
+
+    var _story = {
+        name : $dataChunk.name,
+        ifid : $dataChunk.ifid
+    };
+
+    var harloweVersion = $dataChunk.attr('format-version');
+    var versionParts = harloweVersion.split('.');
+
+    var _engine = {
+        major : versionParts[0],
+        minor : versionParts[1],
+        patch : versionParts[2],
+        semantic : harloweVersion 
+    };
+
     window.Harlowe = window.Harlowe || {};
 
     window.Harlowe = Object.assign(window.Harlowe, {
@@ -39,6 +56,8 @@
             STATE : require('state'),
             CHANGER : require('datatypes/changercommand'),
             ENGINE : require('engine')
-        }
+        },
+        engine : _engine,
+        story : _story
     });
 }());
