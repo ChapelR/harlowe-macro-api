@@ -32,31 +32,31 @@
 
     var $dataChunk = $('tw-storydata');
 
-    var _story = {
+    var _story = Object.freeze({
         name : $dataChunk.name,
         ifid : $dataChunk.ifid
-    };
+    });
 
     var harloweVersion = $dataChunk.attr('format-version');
     var versionParts = harloweVersion.split('.');
 
-    var _engine = {
+    var _engine = Object.freeze({
         major : versionParts[0],
         minor : versionParts[1],
         patch : versionParts[2],
         semantic : harloweVersion 
-    };
+    });
 
     window.Harlowe = window.Harlowe || {};
 
     window.Harlowe = Object.assign(window.Harlowe, {
         version : _version,
-        API_ACCESS : {
+        API_ACCESS : Object.freeze({
             MACROS : require('macros'),
             STATE : require('state'),
             CHANGER : require('datatypes/changercommand'),
             ENGINE : require('engine')
-        },
+        }),
         engine : _engine,
         story : _story
     });
