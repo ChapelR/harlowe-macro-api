@@ -15,30 +15,17 @@ See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tre
 - [Installation Guide](installation-guide.md)
 - [Macro Collection](examples/main)
 - Framework Documentation
-
   - [Macro API](#macro-api)
-
     - [Function: `Harlowe.macro()`](#function-harlowemacro)
-- [Creating Basic Macros](#creating-basic-macros)
+    - [Creating Basic Macros](#creating-basic-macros)
     - [Creating Changer Macros](#creating-changer-macros)
-- [Story Information and Version APIs](story-information-and-version-apis)
-    - [Property: `Harlowe.version.major](#function-harloweversionmajor)
-  - [Property: `Harlowe.version.minor`](#function-harloweversionminor)
-    - [Property: `Harlowe.version.patch`](#function-harloweversionpatch)
-  - [Function: `Harlowe.version.semantic()`](#function-harloweversionsemantic)
-    - [Property: `Harlowe.engine.major`](#function-harloweenginemajor)
-    - [Property: `Harlowe.engine.minor`](#function-harloweengineminor)
-    - [Property: `Harlowe.engine.patch`](#function-harloweenginepatch)
-    - [Property: `Harlowe.engine.semantic`](#function-harloweenginesemantic)
-    - [Property: `Harlowe.story.name`](#function-harlowestoryname)
-    - [Property: `Harlowe.story.ifid`](#function-harlowestoryifid)
-  - [Storage API](storage-api)
+  - [Story Information and Version APIs](#story-information-and-version-apis)
+  - [Storage API](#storage-api)
     - [Function: `Harlowe.storage.save()`](#function-harlowestoragesave)
     - [Function: `Harlowe.storage.load()`](#function-harlowestorageload)
     - [Function: `Harlowe.storage.remove()`](#function-harlowestorageremove)
     - [Function: `Harlowe.storage.clear()`](#function-harlowestorageclear)
   - [Other APIs](#other-apis)
-  
     - [Function: `Harlowe.passage()`](#function-harlowepassage)
     - [Function: `Harlowe.tags()`](#function-harlowetags)
     - [Function: `Harlowe.goto()`](#function-harlowegoto)
@@ -312,59 +299,25 @@ Harlowe.macro('classy', function () {
 
 You can access basic story information, the version information for Harlowe, and the version information for this framework using these properties and methods.
 
-### Property: `Harlowe.version.major`
+- `Harlowe.version.major`: This property holds the **framework**'s major version.
 
-This property holds the **framework**'s major version.
+- `Harlowe.version.minor`: This property holds the **framework**'s minor version.
 
-### Property: `Harlowe.version.minor`
+- `Harlowe.version.patch`: This property holds the **framework**'s patch version.
 
-This property holds the **framework**'s minor version.
+- `Harlowe.version.semantic()`: Returns the semantic version of the framework.
 
-### Property: `Harlowe.version.patch`
+- `Harlowe.engine.major`: This property holds the Harlowe **engine**'s major version.
 
-This property holds the **framework**'s patch version.
+- `Harlowe.engine.minor`: This property holds the Harlowe **engine**'s minor version.
 
-### Function: `Harlowe.version.semantic()`
+- `Harlowe.engine.patch`: This property holds the Harlowe **engine**'s patch version.
 
-Returns the semantic version of the framework.
+- `Harlowe.engine.semantic`: This property holds the Harlowe **engine**'s semantic version string.
 
-#### Syntax
+- `Harlowe.story.name`: This property holds the story's name.
 
-```javascript
-Harlowe.version.semantic()
-```
-
-#### Arguments
-
-- none.
-
-#### Returns
-
-( *`string`* ) The semantic version of the framework.
-
-### Property: `Harlowe.engine.major`
-
-This property holds the Harlowe **engine**'s major version.
-
-### Property: `Harlowe.engine.minor`
-
-This property holds the Harlowe **engine**'s minor version.
-
-### Property: `Harlowe.engine.patch`
-
-This property holds the Harlowe **engine**'s patch version.
-
-### Property: `Harlowe.engine.semantic`
-
-This property holds the Harlowe **engine**'s semantic version string.
-
-### Property: `Harlowe.story.name`
-
-This property holds the story's name.
-
-### Property: `Harlowe.story.ifid`
-
-This property holds the story's IFID, which is a unique identifier string for the story.
+- `Harlowe.story.ifid`: This property holds the story's IFID, which is a unique identifier string for the story.
 
 ## Storage API
 
