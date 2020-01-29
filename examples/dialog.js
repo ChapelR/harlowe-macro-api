@@ -111,7 +111,7 @@
         setupFrameClasses(classes);
 
     }, function (title) {
-        this.descriptor.target.addClass('in-dialog'); // hide when not in dialog element via CSS
+        this.descriptor.target.addClass('in-dialog');
 
         setupTitle(title);
         setupBody(this.descriptor.target);
