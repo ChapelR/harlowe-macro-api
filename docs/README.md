@@ -19,25 +19,36 @@ See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tre
   - [Macro API](#macro-api)
 
     - [Function: `Harlowe.macro()`](#function-harlowemacro)
-
-    - [Creating Basic Macros](#creating-basic-macros)
-
+- [Creating Basic Macros](#creating-basic-macros)
     - [Creating Changer Macros](#creating-changer-macros)
-
+- [Story Information and Version APIs](story-information-and-version-apis)
+    - [Property: `Harlowe.version.major](#function-harloweversionmajor)
+  - [Property: `Harlowe.version.minor`](#function-harloweversionminor)
+    - [Property: `Harlowe.version.patch`](#function-harloweversionpatch)
+  - [Function: `Harlowe.version.semantic()`](#function-harloweversionsemantic)
+    - [Property: `Harlowe.engine.major`](#function-harloweenginemajor)
+    - [Property: `Harlowe.engine.minor`](#function-harloweengineminor)
+    - [Property: `Harlowe.engine.patch`](#function-harloweenginepatch)
+    - [Property: `Harlowe.engine.semantic`](#function-harloweenginesemantic)
+    - [Property: `Harlowe.story.name`](#function-harlowestoryname)
+    - [Property: `Harlowe.story.ifid`](#function-harlowestoryifid)
+  - [Storage API](storage-api)
+    - [Function: `Harlowe.storage.save()`](#function-harlowestoragesave)
+    - [Function: `Harlowe.storage.load()`](#function-harlowestorageload)
+    - [Function: `Harlowe.storage.remove()`](#function-harlowestorageremove)
+    - [Function: `Harlowe.storage.clear()`](#function-harlowestorageclear)
   - [Other APIs](#other-apis)
-
+  
     - [Function: `Harlowe.passage()`](#function-harlowepassage)
-    
     - [Function: `Harlowe.tags()`](#function-harlowetags)
-    
     - [Function: `Harlowe.goto()`](#function-harlowegoto)
-    
     - [Function: `Harlowe.variable()`](#function-harlowevariable)
-    
     - [Function: `Harlowe.visited()`](#function-harlowevisited)
     - [Function: `Harlowe.hasVisited()`](#function-harlowehasvisited)
     - [Function: `Harlowe.turns()`](#function-harloweturns)
-  
+    - [Function: `Harlowe.helpers.isSerialisable()`](#function-harlowehelpersisserialisable)
+    - [Function: `Harlowe.helpers.arrayify()`](#function-harlowehelpersarrayify)
+    - [Function: `Harlowe.helpers.getPassageData()`](#function-harlowehelpersgetpassagedata)
   - [API_ACCESS](#api_access)
   - [Unsolicited Advice for Macro Creators](#unsolicited-advice-for-macro-creators)
 - [Examples](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples)
@@ -297,11 +308,176 @@ Harlowe.macro('classy', function () {
 });
 ```
 
+## Story Information and Version APIs
+
+You can access basic story information, the version information for Harlowe, and the version information for this framework using these properties and methods.
+
+### Property: `Harlowe.version.major`
+
+This property holds the **framework**'s major version.
+
+### Property: `Harlowe.version.minor`
+
+This property holds the **framework**'s minor version.
+
+### Property: `Harlowe.version.patch`
+
+This property holds the **framework**'s patch version.
+
+### Function: `Harlowe.version.semantic()`
+
+Returns the semantic version of the framework.
+
+#### Syntax
+
+```javascript
+Harlowe.version.semantic()
+```
+
+#### Arguments
+
+- none.
+
+#### Returns
+
+( *`string`* ) The semantic version of the framework.
+
+### Property: `Harlowe.engine.major`
+
+This property holds the Harlowe **engine**'s major version.
+
+### Property: `Harlowe.engine.minor`
+
+This property holds the Harlowe **engine**'s minor version.
+
+### Property: `Harlowe.engine.patch`
+
+This property holds the Harlowe **engine**'s patch version.
+
+### Property: `Harlowe.engine.semantic`
+
+This property holds the Harlowe **engine**'s semantic version string.
+
+### Property: `Harlowe.story.name`
+
+This property holds the story's name.
+
+### Property: `Harlowe.story.ifid`
+
+This property holds the story's IFID, which is a unique identifier string for the story.
+
+## Storage API
+
+This API gives access to a specific JSON data object in local storage where you may store and serializable data. The data stored is completely separate from Harlowe's saved data.
+
+### Function: `Harlowe.storage.save()`
+
+Saves data to local storage.
+
+#### Syntax
+
+```javascript
+Harlowe.storage.save(key, data)
+```
+
+#### Arguments
+
+- `key` ( *`string`* ) A string key to associate with the stored data, allowing it to be retrieved.
+- `data` ( *`any`* ) Any JSON-serializable data.
+
+#### Returns
+
+Nothing.
+
+#### Examples
+
+```javascript
+var myData = {
+    why : 4,
+    uwu : 'Yes I did that, fite me.'
+};
+Harlowe.storage.save('some-data', myData);
+```
+
+### Function: `Harlowe.storage.load()`
+
+Retrieves data from local storage.
+
+#### Syntax
+
+```javascript
+Harlowe.storage.load(key)
+```
+
+#### Arguments
+
+- `key` ( *`string`* ) A string key associated with data stored with `Harlowe.storage.save()`.
+
+#### Returns
+
+( *`any`* ) Returns stored data previously saved via `Harlowe.storage.save()`, or `undefined`.
+
+#### Examples
+
+```javascript
+var myData = Harlowe.storage.load('some-data');
+console.log(myData.uwu);
+```
+
+### Function: `Harlowe.storage.remove()`
+
+Deletes a key and its associated data in local storage.
+
+#### Syntax
+
+```javascript
+Harlowe.storage.remove(key)
+```
+
+#### Arguments
+
+- `key` ( *`string`* ) A string key associated with data stored with `Harlowe.storage.save()`.
+
+#### Returns
+
+Nothing.
+
+#### Examples
+
+```javascript
+Harlowe.storage.remove('some-data');
+console.log(Harlowe.storage.load('some-data')); // undefined
+```
+
+### Function: `Harlowe.storage.clear()`
+
+Empties the local storage data accessible via this API, and only that data. Other local storage data used by the website or Harlowe are unaffected.
+
+#### Syntax
+
+```javascript
+Harlowe.storage.clear()
+```
+
+#### Arguments
+
+- none.
+
+#### Returns
+
+Nothing.
+
+#### Examples
+
+```javascript
+Harlowe.storage.clear();
+```
+
 ## Other APIs
 
-This section details some JavaScript APIs that this script exposes to help you work with Harlowe in your macros (and out of your macros). You can access the actual Harlowe APIs (see below), but certain parts of Harlowe, specifically the History system, are fragile, and this group of APIs only exposes safe things, or exposes dangerous things in safer ways, so it is recommended over messing with Harlowe's APIs yourself. 
+This section details other JavaScript APIs that this script exposes to help you work with Harlowe in your macros (and out of your macros). You can access the actual Harlowe APIs (see below), but certain parts of Harlowe, specifically the History system, are fragile, and this group of APIs only exposes safe things, or exposes dangerous things in safer ways, so it is recommended over messing with Harlowe's APIs yourself. 
 
-### Function: Harlowe.passage()
+### Function: `Harlowe.passage()`
 
 Returns the name of the current passage.
 
@@ -325,7 +501,7 @@ Harlowe.passage()
 console.log(Harlowe.passage()); // logs the name of the current passage to console
 ```
 
-### Function: Harlowe.tags()
+### Function: `Harlowe.tags()`
 
 Returns the tags, as an array, of the indicated passage
 
@@ -349,7 +525,7 @@ Harlowe.tags([passage])
 console.log(Harlowe.tags()); // logs the tags of the current passage to the console
 ```
 
-### Function: Harlowe.goto()
+### Function: `Harlowe.goto()`
 
 Go to a named passage. Adds a new moment in the history, regardless of where the user is sent.
 
@@ -373,7 +549,7 @@ Nothing.
 Harlowe.goto('some passage'); // navigate to the passage named "some passage"
 ```
 
-### Function: Harlowe.variable()
+### Function: `Harlowe.variable()`
 
 Get or set Harlowe variables. Will error if data that Harlowe is incapable of properly serializing is set to a variable.
 
@@ -402,7 +578,7 @@ Harlowe.variable('$myVar'); // 'hello'
 Harlowe.variable('$myVar', 'goodbye'); // 'goodbye'
 ```
 
-### Function: Harlowe.visited()
+### Function: `Harlowe.visited()`
 
 See how many times the user has visited the indicated passage.
 
@@ -434,7 +610,7 @@ if (Harlowe.visited('bar') < 3) {
 (if: Harlowe.visited() > 100)[ You must like this passage! ]
 ```
 
-### Function: Harlowe.hasVisited()
+### Function: `Harlowe.hasVisited()`
 
 Returns whether the user has ever visited the indicated passage.
 
@@ -466,11 +642,13 @@ if (!Harlowe.hasVisited('bar')) {
 (if: Harlowe.hasVisited('school'))[ You went to school before! ]
 ```
 
-### Function: Harlowe.turns()
+### Function: `Harlowe.turns()`
 
 Returns the length of the history (does not include undone future moments).
 
 > Note: In passages, you can check `(history:)'s length` for a turn count.
+
+#### Syntax
 
 ```javascript
 Harlowe.turns();
@@ -490,6 +668,86 @@ Harlowe.turns();
 if (Harlowe.turns() > 100) {
     console.log('You have been playing for a while!');
 } 
+```
+
+### Function: `Harlowe.helpers.isSerialisable()`
+
+Checks whether the indicated data can be serialized and saved to Harlowe's history system, and therefore stored in Harlowe story variables. This is *not* the same as being JSON serializable, what Harlowe can save is more limited.
+
+#### Syntax
+
+```javascript
+Harlowe.helpers.isSerialisable(data);
+```
+
+#### Arguments
+
+- `data` ( *`any`* ) The data you want to check to see if it's serializable.
+
+#### Returns
+
+( *`boolean`* ) Returns `true` if the data can safely be stored in Harlowe story variables.
+
+#### Examples
+
+```
+if (Harlowe.helpers.isSerialisable(myData)) {
+	Harlowe.variables('$myVar', myData);
+} else {
+	alert("I can't save that!");
+}
+```
+
+### Function: `Harlowe.helpers.arrayify()`
+
+Turns an array-like object, e.g. function `arguments`, into a proper array and optionally slices it.
+
+#### Syntax
+
+```javascript
+Harlowe.helpers.arrayify(arrayLike [, sliceIdx]);
+```
+
+#### Arguments
+
+- `arrayLike` ( *`object`* ) An array-like that is not an array or set.
+- `sliceIdx` ( *`number`* ) ( optional ) If provided slices the array though the end with this number as a start index.
+
+#### Returns
+
+( *`array`* ) Returns the created array.
+
+#### Examples
+
+```
+function hi () {
+	var args = Harlowe.helpers.arrayify(arguments);
+	// ...
+}
+```
+
+### Function: `Harlowe.helpers.getPassageData()`
+
+Returns the `<tw-passagedata>` element for the indicated passage, as a jQuery instance.
+
+#### Syntax
+
+```javascript
+Harlowe.helpers.getPassageData(name);
+```
+
+#### Arguments
+
+- `name` ( *`string`* ) The name of a passage.
+
+#### Returns
+
+( *`jQuery instance`* ) Returns a jQuery object of the `<tw-passagedata>` element representing the indicated passage.
+
+#### Examples
+
+```javascript
+console.log(Harlowe.helpers.getPassageData('my passage').text()); // logs passage content
 ```
 
 ## API_ACCESS
