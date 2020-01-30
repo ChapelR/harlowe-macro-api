@@ -84,7 +84,13 @@
         }
     }
 
-    init();
+    function hasStorage () {
+        return load() !== undefined;
+    }
+
+    if (!hasStorage()) {
+        init();
+    }
 
     Harlowe.storage = {
         clear : init,

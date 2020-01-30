@@ -115,6 +115,8 @@ In addition to the above properties, the macro context also has the following me
 
 ### Creating Basic Macros
 
+?> Basic macros, do to the way this framework implements them, can/will attach themselves to hooks in the same way variables will. This can cause odd errors occasionally. This may be fixed in a future version, but doing so would probably cause significant, breaking changes to the API, so for now this minor issue will remain.
+
 Creating basic macros is fairly straight forward. 
 
 Basic macros need a name and a handler function and can return values to be used as arguments to other macros or to be displayed to users. For example:

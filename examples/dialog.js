@@ -78,10 +78,12 @@
 
     function showDialog () {
         $overlay.removeClass('hidden');
+        $(document).trigger(':dialog-open');
     }
 
     function hideDialog () {
         $overlay.addClass('hidden');
+        $(document).trigger(':dialog-close');
     }
 
     // close via overlay/close link
@@ -111,9 +113,12 @@
         setupFrameClasses(classes);
 
     }, function (title) {
+        // `tw-hook.in-dialog` -> styles for dialog content
         this.descriptor.target.addClass('in-dialog');
 
         setupTitle(title);
+
+        // this function uses `.append()`, so the target element will be removed from the document flow after it's parsed
         setupBody(this.descriptor.target);
 
         showDialog();

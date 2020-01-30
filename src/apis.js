@@ -33,8 +33,8 @@
     var $dataChunk = $('tw-storydata');
 
     var _story = Object.freeze({
-        name : $dataChunk.name,
-        ifid : $dataChunk.ifid
+        name : $dataChunk.attr('name'),
+        ifid : $dataChunk.attr('ifid')
     });
 
     var harloweVersion = $dataChunk.attr('format-version');
