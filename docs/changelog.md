@@ -18,12 +18,13 @@
   - `Harlowe.engine.major`, `Harlowe.engine.minor`, `Harlowe.engine.patch`, and `Harlowe.engine.sematic` are properties that contain numbers referring to the version numbers of the Harlowe engine.
   - `Harlowe.story.name` contains the name of the story.
   - `Harlowe.story.ifid` contains the story's IFID, a unique identifier.
-- **[Examples]** Added two more examples:
+- **[Examples]** Added more examples:
   - `(dialog:)` A dialog API and macro for Harlowe.
   - `(clamp:)` A macro wrapper for the clamping cookbook example.
+  - `(achievements:)`/`(ach-add:)`/etc. A macro wrapper for [this achievements system](https://gist.github.com/greyelf/55a45f461ded3d90a0cc28412187db0a).
 - **[Docs]** Documented example macros. Fixed some typos and errors.
 - **[Meta]** Code base improvements.
-  - Split up the code base into individual "modules." These are just concatenated, not proper modules, as the framework is fairly simple.
+  - Split up the code base into individual "modules." These are just concatenated, not proper modules, as the framework is fairly simple and webpack would bloat things.
   - Build script now adds version info (as pulled from `package.json`) to the scripts.
 
 ### v0.3.0

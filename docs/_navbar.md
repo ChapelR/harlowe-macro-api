@@ -1,5 +1,5 @@
 - [Docs](/)
 - [Install](installation-guide.md)
-- [Macros](/examples/main)
+- [Macros](/examples/main.md)
 - [Changelog](changelog.md)
 - [Demo](./demo ':ignore')

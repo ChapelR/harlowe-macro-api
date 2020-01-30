@@ -6,14 +6,14 @@ This is unofficial code, and relies on hacks. Future versions of Harlowe may bre
 
 This documentation is intended for people who *make* custom macros, so it may be a bit technical. If you were sent here by some script written by some author and can't figure out what to do, go [here](installation-guide.md). It is recommended that macro creators similarly point their end users to the installation guide linked above rather than to this README or the repo in general.
 
-If you are looking for custom macros you can use, [install the framework](installation-guide.md) and then check out the [macros page](examples/main).
+If you are looking for custom macros you can use, [install the framework](installation-guide.md) and then check out the [macros page](examples/main.md).
 
-See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). 
+See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). Developer documentation for forking and contributing is [here](developer.md).
 
 ## Contents
 
 - [Installation Guide](installation-guide.md)
-- [Macro Collection](examples/main)
+- [Macro Collection](examples/main.md)
 - Framework Documentation
   - [Macro API](#macro-api)
     - [Function: `Harlowe.macro()`](#function-harlowemacro)

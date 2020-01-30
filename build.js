@@ -7,17 +7,28 @@ const jetpack = require('fs-jetpack'),
     cleancss = require('postcss-clean'),
     zip = require('node-zip')(),
     fs = require('fs'),
-    version = require('./package.json').version,
-    scriptName = 'Harlowe Macro Framework',
+    version = require('./package.json').version;
+
+const scriptName = 'Harlowe Macro Framework',
     src = 'src/',
     dist = 'dist/macro.min.js',
     examples = 'examples/',
     binary = 'harlowe-macro-api.zip';
 
-function build (path, output) {
+const files = [
+    // order is important!
+    'apis.js',
+    'helpers.js',
+    'storage.js',
+    'context.js',
+    'macro.js',
+    'userland.js'
+];
+
+function build (list, path, output) {
     
-    let source = jetpack.find(path, { matching : '*.js' })
-        .map(file => jetpack.read(file, 'utf8')).join('\n\n');
+    let source = list
+        .map(file => jetpack.read(path + file, 'utf8')).join('\n\n');
 
     let versionParts = version.split('.');
 
@@ -33,7 +44,7 @@ function build (path, output) {
     if (result.error) {
         console.warn(scriptName, result.error);
     } else {
-        console.log('\x1b[36m', 'All clear: "' + scriptName + '"');
+        console.log('All clear: "' + scriptName + '"');
     }
     
     ret = '// ' + scriptName + ', by Chapel; version ' + version + '\n;' + result.code + '\n// end ' + scriptName; 
@@ -59,7 +70,7 @@ function minifyExamples (ex) {
         if (result.error) {
             console.warn(name, result.error);
         } else {
-            console.log('\x1b[36m', 'All clear: "' + name + '"');
+            console.log('All clear: "' + name + '"');
         }
         
         path.unshift('.');
@@ -93,7 +104,7 @@ function minifyCSS (ex) {
             result.warnings().forEach(warn => {
                 console.warn(name, warn.toString());
             });
-            console.log('\x1b[36m', 'All clear: "' + name + '"');
+            console.log('All clear: "' + name + '"');
             const ret = '/* ' + name + ', for Harlow Macro API, by Chapel */\n' + result.css + '\n/* end ' + name + '*/';
             jetpack.write(path, ret, {atomic : true});
         });
@@ -113,9 +124,11 @@ function zipUp (path, output) {
     const bin = zip.generate({ base64 : false, compression : 'DEFLATE' });
 
     fs.writeFileSync(output, bin, 'binary');
+
+    console.log('All clear: "' + output + '"');
 }
 
-build(src, dist);
+build(files, src, dist);
 minifyExamples(examples);
 minifyCSS(examples);
 zipUp(dist, binary);
