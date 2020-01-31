@@ -1,5 +1,6 @@
 - [Docs](/)
 - [Install](installation-guide.md)
 - [Macros](/examples/main.md)
+- [Downloads](./download ":ignore")
 - [Changelog](changelog.md)
 - [Demo](./demo ':ignore')

@@ -1,14 +1,20 @@
 # Installation Guide
 
-This is a guide for installing the custom macro framework. The custom macro framework itself does **not** include any custom macros, it is instead a resource to allow for the creation of custom macros. If you want to create your own custom macros, refer to the [documentation](README.md).
+This is a guide for installing the custom macro framework. The custom macro framework itself does **not** include any custom macros, it is instead a resource to allow for the creation of custom macros. 
+
+If you want to create your own custom macros, refer to the [documentation](README.md).
+
+If you're looking for custom macros, look [here](examples/main.md). You can generate a download with the framework and the macros you want with the [download utility](./download ":ignore").
 
 ## Step 1: Get the Code
+
+You can create a custom download package with the [download utility](./download ":ignore"), which will include the framework and whichever [macros](examples/main.md) you wish to install, all bundled into a single file (or two files, if CSS is required).
 
 Head over to the [releases page](https://github.com/ChapelR/harlowe-macro-api/releases) and find the latest release. Under `assets`, find the `harlowe-macro-api.zip` file and click on it to download it. On your computer, extract the files from the zip archive.
 
 ## Step 2: Copy the Code
 
-Open the `macro.js` file in a **text editor** (like Notepad or TextEdit). It is very important you do not use a word processor. Select all the code and copy it (`CTRL + A` followed by `CTRL + C` should work fine).
+Open the `macro.js` file (or the `bundle.js` file if you used the download utility) in a **text editor** (like Notepad or TextEdit). It is very important you do not use a word processor. Select all the code and copy it (`CTRL + A` followed by `CTRL + C` should work fine).
 
 ## Step 3: Paste the Code
 
@@ -19,6 +25,8 @@ Open Twine 2, either the application on your computer, or on the web. Open your 
 In the resulting editor window, paste the code you copied in Step 2. If there is already code in your JavaScript section, or you plan to add more, make sure this code is first.
 
 Since macros you write or install will *always* depend on this code, you always want to make sure you paste your custom macros in *under* the code we just pasted in now.
+
+If you've used the download utility and one or more of the macros you selected requires CSS, there will also be a `bundle.css` file. You will want to copy and paste this file's content into the story stylesheet are using the `Edit Story Stylesheet` option.
 
 ## But I'm Not Using Twine 2!
 

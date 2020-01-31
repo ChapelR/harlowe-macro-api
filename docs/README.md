@@ -2,6 +2,8 @@
 
 This code adds (more accurately recreates) a macro API for Harlowe to allow users to create and distribute custom macros. Download [the latest release](https://github.com/ChapelR/harlowe-macro-api/releases) and place the contents of `macro.js` into your story JavaScript and use the framework as described below to create macros. Generally speaking, this code should be the first thing in your JavaScript section in Twine 2, or the first JS file compiled by your compiler.
 
+You may also generate a custom download package with the framework and a selection of custom macros with the [download utility](./download ":ignore").
+
 This is unofficial code, and relies on hacks. Future versions of Harlowe may break it at any time. Intended for Harlowe 3. May work in Harlowe 1 or 2, but bugs or issues in those versions of Harlowe **will not be fixed**.
 
 This documentation is intended for people who *make* custom macros, so it may be a bit technical. If you were sent here by some script written by some author and can't figure out what to do, go [here](installation-guide.md). It is recommended that macro creators similarly point their end users to the installation guide linked above rather than to this README or the repo in general.
@@ -14,6 +16,7 @@ See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tre
 
 - [Installation Guide](installation-guide.md)
 - [Macro Collection](examples/main.md)
+- [Download Utility](./download ":ignore")
 - Framework Documentation
   - [Macro API](#macro-api)
     - [Function: `Harlowe.macro()`](#function-harlowemacro)

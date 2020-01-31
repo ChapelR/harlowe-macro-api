@@ -16,4 +16,6 @@ The following are some example macros created by me using this framework. They'r
 
 ## Installation
 
-[Install the custom macro framework](/installation-guide.md) then install the macro scripts in the same manor. The macros must be *after* the main macro API script. Some macros may also require additional CSS, which should be installed in your story Stylesheet section. The individual documentation pages will have links to the minified and pretty scripts (and CSS, as appropriate). The minified versions will have improved performance and are recommended for most users.
+You can generate a custom download that packages the framework with any and all of the above custom macros using the [download utility](./download ":ignore").
+
+Or [install the custom macro framework](/installation-guide.md) then install the individual macro scripts in the same manor. The macros must be *after* the main macro API script. Some macros may also require additional CSS, which should be installed in your story Stylesheet section. The individual documentation pages will have links to the minified and pretty scripts (and CSS, as appropriate). The minified versions will have improved performance and are recommended for most users.
