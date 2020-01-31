@@ -1,5 +1,10 @@
 ## Pre-release Versions
 
+### v0.4.1
+
+- **[Docs]** Clean up and typo fixes.
+- **[Meta]** Added download utility.
+
 ### v0.4.0
 
 - **[Update]** Added the storage API for accessing local storage. The framework operates on its own separate section in local storage and won't interfere with Harlowe's saves and such.
