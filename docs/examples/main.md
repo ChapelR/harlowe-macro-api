@@ -2,6 +2,8 @@
 
 The following are some example macros created by me using this framework. They're intended as both examples and as fully usable macros in their own right.
 
+?> **Made some macros of your own?** If so, consider [contributing them](CONTRIBUTING.md) to the project.
+
 ## Documentation
 
 - [Articles](/examples/articles.md)

@@ -10,7 +10,7 @@ This documentation is intended for people who *make* custom macros, so it may be
 
 If you are looking for custom macros you can use, [install the framework](installation-guide.md) and then check out the [macros page](examples/main.md).
 
-See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). Developer documentation for forking and contributing is [here](developer.md).
+See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tree/master/examples). Developer documentation for forking and contributing is [here](CONTRIBUTING.md).
 
 ## Contents
 
@@ -36,7 +36,7 @@ See some example scripts [here](https://github.com/ChapelR/harlowe-macro-api/tre
     - [Function: `Harlowe.visited()`](#function-harlowevisited)
     - [Function: `Harlowe.hasVisited()`](#function-harlowehasvisited)
     - [Function: `Harlowe.turns()`](#function-harloweturns)
-    - [Function: `Harlowe.helpers.isSerialisable()`](#function-harlowehelpersisserialisable)
+    - [Function: `Harlowe.helpers.isSerializable()`](#function-harlowehelpersisserializable)
     - [Function: `Harlowe.helpers.arrayify()`](#function-harlowehelpersarrayify)
     - [Function: `Harlowe.helpers.getPassageData()`](#function-harlowehelpersgetpassagedata)
   - [API_ACCESS](#api_access)
@@ -304,13 +304,13 @@ Harlowe.macro('classy', function () {
 
 You can access basic story information, the version information for Harlowe, and the version information for this framework using these properties and methods.
 
-- `Harlowe.version.major`: This property holds the **framework**'s major version.
+- `Harlowe.framework.major`: This property holds the **framework**'s major version.
 
-- `Harlowe.version.minor`: This property holds the **framework**'s minor version.
+- `Harlowe.framework.minor`: This property holds the **framework**'s minor version.
 
-- `Harlowe.version.patch`: This property holds the **framework**'s patch version.
+- `Harlowe.framework.patch`: This property holds the **framework**'s patch version.
 
-- `Harlowe.version.semantic()`: Returns the semantic version of the framework.
+- `Harlowe.framework.semantic`: This property holds the Harlowe **framework**'s semantic version string.
 
 - `Harlowe.engine.major`: This property holds the Harlowe **engine**'s major version.
 
@@ -628,14 +628,14 @@ if (Harlowe.turns() > 100) {
 } 
 ```
 
-### Function: `Harlowe.helpers.isSerialisable()`
+### Function: `Harlowe.helpers.isSerializable()`
 
 Checks whether the indicated data can be serialized and saved to Harlowe's history system, and therefore stored in Harlowe story variables. This is *not* the same as being JSON serializable, what Harlowe can save is more limited.
 
 #### Syntax
 
 ```javascript
-Harlowe.helpers.isSerialisable(data);
+Harlowe.helpers.isSerializable(data);
 ```
 
 #### Arguments
@@ -649,7 +649,7 @@ Harlowe.helpers.isSerialisable(data);
 #### Examples
 
 ```
-if (Harlowe.helpers.isSerialisable(myData)) {
+if (Harlowe.helpers.isSerializable(myData)) {
 	Harlowe.variables('$myVar', myData);
 } else {
 	alert("I can't save that!");

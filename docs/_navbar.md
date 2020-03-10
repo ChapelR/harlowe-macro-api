@@ -1,6 +1,6 @@
 - [Docs](/)
 - [Install](installation-guide.md)
 - [Macros](/examples/main.md)
-- [Downloads](./download ":ignore")
+- [Downloads](https://harlowe.twinelab.net/download ":ignore")
 - [Changelog](changelog.md)
-- [Demo](./demo ':ignore')
+- [Demo](https://harlowe.twinelab.net/demo ':ignore')

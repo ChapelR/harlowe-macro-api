@@ -44,6 +44,7 @@
     window.Harlowe = Object.assign(window.Harlowe, {
         helpers : {
             isSerialisable : isSerialisable,
+            isSerializable : isSerialisable,
             arrayify : arrayify,
             getPassageData : getPassageData
         }
