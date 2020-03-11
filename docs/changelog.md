@@ -1,3 +1,14 @@
+## Release Versions
+
+### v1.0.0
+
+- **[Update]** Changed `Harlowe.version` to `Harlowe.framework` to alleviate any confusion with `Harlowe.engine`.
+- **[Update]** `Harlowe.framework.semantic` is no longer a function, giving it parity with all other `Harlowe.framework` and `Harlowe.engine` properties.
+- **[Update]** The alternative spelling `Harlowe.helpers.isSerializable()` now works in addition to `Harlowe.helpers.isSerialisable()`.
+- **[Docs]** Renamed `developer.md` to `CONTRIBUTING.md`. 
+  - Added link to Contributor Covenant 2.0 for code of conduct.
+  - Added details for contributing macro scripts and links to macros.
+
 ## Pre-release Versions
 
 ### v0.4.1

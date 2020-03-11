@@ -21,14 +21,17 @@
 
 (function () {
     'use strict';
-    var _version = Object.freeze({
+    var _version = {
         major : /{{major}}/,
         minor : /{{minor}}/,
-        patch : /{{patch}}/,
-        semantic : function () {
-            return [ this.major, this.minor, this.patch ].join('.');
-        }
-    });
+        patch : /{{patch}}/
+    };
+
+    var _sem = [_version.major, _version.minor, _version.patch ].join('.');
+
+    _version.semantic = _sem;
+
+    _version = Object.freeze(_version);
 
     var $dataChunk = $('tw-storydata');
 
@@ -50,7 +53,7 @@
     window.Harlowe = window.Harlowe || {};
 
     window.Harlowe = Object.assign(window.Harlowe, {
-        version : _version,
+        framework : _version,
         API_ACCESS : Object.freeze({
             MACROS : require('macros'),
             STATE : require('state'),
