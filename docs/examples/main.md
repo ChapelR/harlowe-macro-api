@@ -15,6 +15,7 @@ The following are some example macros created by me using this framework. They'r
 - [Dialog](/examples/dialog.md)
 - [Clamp](/examples/clamp.md)
 - [Achievements](/examples/achievements.md)
+- [Macro Passages](/examples/macro-passages.md) (by [rachek64](https://github.com/rachek64))
 
 ## Installation
 
