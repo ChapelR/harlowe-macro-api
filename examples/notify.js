@@ -106,6 +106,8 @@
 
     });
 
-    setup.notify = notify;
+    window.setup = window.setup || {};
+
+    window.setup.notify = notify;
 
 }());
