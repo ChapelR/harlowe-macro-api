@@ -42,7 +42,7 @@
 
     function loadFiles (files) {
         var code = {
-            js : [],
+            js : [''],
             css : [],
             noLoad : 0
         };
@@ -56,8 +56,12 @@
             })
                 .done( function (data) {
                     isCSS = this.url.includes('.css');
-                    code[isCSS ? 'css' : 'js'].push(data);
-                    var progress = (code.js.length + code.css.length + code.noLoad) / arr.length;
+                    if (idx === 0 && !isCSS) {
+                        code.js[0] = data;
+                    } else {
+                        code[isCSS ? 'css' : 'js'].push(data);
+                    }
+                    var progress = (code.js.length + (code.js[0] === '' ? -1 : 0) + code.css.length + code.noLoad) / arr.length;
                     $(document).trigger({
                         type : ':progress',
                         progress : progress
