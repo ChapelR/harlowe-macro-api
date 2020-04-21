@@ -13,6 +13,7 @@
         'Articles' : 'articles',
         'Clamp': 'clamp',
         'Dialog' : 'dialog+css',
+        'Notify' : 'notify+css',
         'Dice': 'dice',
         'Hotkeys': 'hotkeys',
         'Playtime': 'playtime',
