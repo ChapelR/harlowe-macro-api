@@ -13,6 +13,7 @@ const scriptName = 'Harlowe Macro Framework',
     src = 'src/',
     dist = 'dist/macro.min.js',
     examples = 'examples/',
+    thirdp = 'examples/third-party/',
     binary = 'harlowe-macro-api.zip';
 
 const files = [
@@ -53,11 +54,14 @@ function build (list, path, output) {
 
 }
 
-function minifyExamples (ex) {
+function minifyExamples (ex, tp) {
     const jsFiles = jetpack.find(ex, {
         matching : '*.js',
         recursive : false
-    });
+    }).concat(jetpack.find(tp, {
+        matching : '*.js',
+        recursive : false
+    }));
     
     jsFiles.forEach( function (file) {
         const source = jetpack.read(file);
@@ -129,6 +133,6 @@ function zipUp (path, output) {
 }
 
 build(files, src, dist);
-minifyExamples(examples);
+minifyExamples(examples, thirdp);
 minifyCSS(examples);
 zipUp(dist, binary);

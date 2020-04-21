@@ -1,0 +1,3 @@
+/* notify.min.css, for Harlow Macro API, by Chapel */
+#notify{position:fixed;display:block;width:16em;right:-20em;top:2em;padding:.5em;background-color:#fff;color:#000;font-family:Georgia,serif;font-size:16px;-webkit-transition:right .3s;transition:right .3s;z-index:10000}#notify.open{right:0}
+/* end notify.min.css*/

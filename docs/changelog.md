@@ -1,5 +1,12 @@
 ## Release Versions
 
+### v1.0.1
+
+- **[Examples]** Added more examples:
+  - `(notify:)` A port of the CMFSC2 `<<notify>>` macro.
+  - `(macro:)` A widget-style macro passage system for Harlowe by rachek64.
+- **[Docs]** Documented example macros.
+
 ### v1.0.0
 
 - **[Update]** Changed `Harlowe.version` to `Harlowe.framework` to alleviate any confusion with `Harlowe.engine`.

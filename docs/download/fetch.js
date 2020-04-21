@@ -4,6 +4,7 @@
     var mainFile = 'https://cdn.jsdelivr.net/gh/chapelr/harlowe-macro-api@latest/dist/macro.min.js';
 
     var baseURL = 'https://cdn.jsdelivr.net/gh/chapelr/harlowe-macro-api@latest/examples/minified/';
+    var tpURL = 'https://cdn.jsdelivr.net/gh/chapelr/harlowe-macro-api@latest/examples/third-party/minified/';
     var extension = '.min.js';
     var extensionCSS = '.min.css';
 
@@ -12,11 +13,13 @@
         'Articles' : 'articles',
         'Clamp': 'clamp',
         'Dialog' : 'dialog+css',
+        'Notify' : 'notify+css',
         'Dice': 'dice',
         'Hotkeys': 'hotkeys',
         'Playtime': 'playtime',
         'Speech Box': 'speechbox+css',
-        'Textbox': 'textbox'
+        'Textbox': 'textbox',
+        'Macro Passages (by rachek64)': '~macro-passages'
     };
 
     var macros = Object.keys(fileNameMap);
@@ -35,7 +38,11 @@
                 fn = fn.split('+')[0];
                 files.push(baseURL + fn + extensionCSS);
             }
-            files.push(baseURL + fn + extension);
+            if (fn[0] === '~') {
+                files.push(tpURL + fn.substr(1) + extension);
+            } else {
+                files.push(baseURL + fn + extension); 
+            }
         });
         return [ mainFile ].concat(files);
     }
