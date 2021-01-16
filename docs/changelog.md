@@ -1,5 +1,9 @@
 ## Release Versions
 
+### v1.0.2
+
+- **[Fix]** Fixed bug in storage cache initialization.
+
 ### v1.0.1
 
 - **[Examples]** Added more examples:
