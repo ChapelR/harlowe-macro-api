@@ -33,7 +33,10 @@
             var store;
             if (storage) {
                 store = JSON.parse(storage.getItem(_key));
-                return name && typeof name === 'string' ? store[name] : store;
+                if (name) {
+                    return name && typeof name === 'string' ? store[name] : store;
+                }
+                return store;
             } else {
                 throw new Error('storage is inaccessible');
             }
@@ -85,7 +88,7 @@
     }
 
     function hasStorage () {
-        return load() !== undefined;
+        return load() != null;
     }
 
     if (!hasStorage()) {
